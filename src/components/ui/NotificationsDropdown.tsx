@@ -10,8 +10,7 @@ import {
   DropdownMenuItem, 
   DropdownMenuLabel, 
   DropdownMenuSeparator, 
-  DropdownMenuTrigger,
-  DropdownMenuFooter
+  DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -154,8 +153,9 @@ const NotificationsDropdown: React.FC = () => {
           </DropdownMenuGroup>
         </ScrollArea>
         
+        {/* Footer substituindo o DropdownMenuFooter que não existe */}
         {notifications.length > 0 && (
-          <DropdownMenuFooter className="flex justify-center p-2 border-t">
+          <div className="flex justify-center p-2 border-t">
             <Button 
               variant="ghost" 
               size="sm" 
@@ -165,7 +165,7 @@ const NotificationsDropdown: React.FC = () => {
               <Trash2 className="h-3.5 w-3.5" />
               <span>Limpar todas</span>
             </Button>
-          </DropdownMenuFooter>
+          </div>
         )}
       </DropdownMenuContent>
     </DropdownMenu>
