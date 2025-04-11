@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import MainLayout from "@/components/layouts/MainLayout";
@@ -8,7 +7,7 @@ import { useCart } from "@/contexts/CartContext";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { ShoppingBag, ArrowLeft, User, Phone, MapPin, AlertCircle, FileText, Home, Building, Map, City, Flag, Globe, ChevronDown, ChevronUp } from "lucide-react";
+import { ShoppingBag, ArrowLeft, User, Phone, MapPin, AlertCircle, FileText, Home, Building, Map, Landmark, Flag, Globe, ChevronDown, ChevronUp } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
@@ -35,10 +34,7 @@ const CheckoutPage = () => {
   const { toast } = useToast();
 
   const validateZipCode = (value: string) => {
-    // Remove non-numeric characters
     const numericZipCode = value.replace(/\D/g, '');
-    
-    // Format with hyphen (99999-999)
     if (numericZipCode.length <= 5) {
       return numericZipCode;
     } else {
@@ -50,7 +46,6 @@ const CheckoutPage = () => {
     const formattedZipCode = validateZipCode(e.target.value);
     setZipCode(formattedZipCode);
     
-    // Validate ZIP code format
     if (formattedZipCode.length > 0 && formattedZipCode.replace(/\D/g, '').length !== 8) {
       setZipCodeError("CEP inválido. Deve conter 8 dígitos.");
     } else {
@@ -81,10 +76,8 @@ const CheckoutPage = () => {
     
     setIsSubmitting(true);
     
-    // Simulate API submission
     await new Promise((resolve) => setTimeout(resolve, 1000));
     
-    // Save order data to session storage for confirmation page
     sessionStorage.setItem("orderData", JSON.stringify({
       name,
       phone,
@@ -364,7 +357,7 @@ const CheckoutPage = () => {
                       htmlFor="city" 
                       className="font-medium text-gray-700 flex items-center gap-2"
                     >
-                      <City size={14} className="text-gray-500" />
+                      <Landmark size={14} className="text-gray-500" />
                       Cidade
                     </Label>
                     <div className="relative mt-1 group">
@@ -474,7 +467,6 @@ const CheckoutPage = () => {
                 {isSubmitting ? "Processando..." : "Confirmar Pedido"}
               </Button>
               
-              {/* Social proof - only on desktop */}
               <div className="flex items-center justify-center text-gray-500 text-sm mt-4">
                 <span className="flex items-center">
                   <span className="inline-flex -space-x-2 overflow-hidden">
