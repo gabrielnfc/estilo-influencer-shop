@@ -69,6 +69,21 @@
   .btn-secondary {
     @apply bg-brand-orange text-white hover:bg-brand-orange/90 rounded-md px-4 py-2 font-medium transition-colors;
   }
+  
+  /* Social hover effects */
+  .social-icon-hover {
+    @apply transition-transform hover:scale-110 hover:rotate-3;
+  }
+  
+  /* Card with gradient border */
+  .card-gradient-border {
+    @apply relative rounded-lg p-0.5 overflow-hidden;
+    background: linear-gradient(to right, #E91E63, #FF5722);
+  }
+  
+  .card-gradient-border > div {
+    @apply bg-white rounded-[calc(0.75rem-2px)] overflow-hidden;
+  }
 }
 
 @layer utilities {
@@ -100,5 +115,18 @@
       transform: scale(1.1);
     }
   }
-}
+  
+  .shimmer {
+    background: linear-gradient(90deg, 
+      rgba(255, 255, 255, 0) 0%, 
+      rgba(255, 255, 255, 0.6) 50%, 
+      rgba(255, 255, 255, 0) 100%);
+    background-size: 200% 100%;
+    animation: shimmerAnimation 1.5s infinite;
+  }
 
+  @keyframes shimmerAnimation {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+}

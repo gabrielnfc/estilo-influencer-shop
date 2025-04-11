@@ -30,7 +30,8 @@ const StoreLayout: React.FC<StoreLayoutProps> = ({ children }) => {
         {/* Sidebar */}
         <div className={`
           lg:w-64 lg:flex-shrink-0 transition-all duration-300
-          fixed lg:relative z-40 h-full
+          fixed lg:relative z-40 h-full 
+          bg-sidebar border-r border-sidebar-border
           ${sidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}
         `}>
           <CategorySidebar />
@@ -46,9 +47,14 @@ const StoreLayout: React.FC<StoreLayoutProps> = ({ children }) => {
         
         {/* Main content */}
         <main className="flex-1 px-4 py-6 md:px-6 overflow-y-auto">
-          {children}
+          <div className="max-w-7xl mx-auto w-full">
+            {children}
+          </div>
         </main>
       </div>
+      
+      {/* Subtle background pattern */}
+      <div className="fixed inset-0 -z-10 bg-grid-white pointer-events-none" />
     </div>
   );
 };

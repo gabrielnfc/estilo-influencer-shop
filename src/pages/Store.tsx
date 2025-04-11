@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import StoreLayout from "@/components/layouts/StoreLayout";
 import ProductGrid from "@/components/store/ProductGrid";
 import { Product } from "@/contexts/CartContext";
+import { Badge } from "@/components/ui/badge";
+import { ShoppingBag } from "lucide-react";
 
 // Sample product data
 const productData: Product[] = [
@@ -112,26 +114,40 @@ const StorePage = () => {
     loadProducts();
   }, []);
 
+  const getCategoryLabel = (cat: string) => {
+    return cat === "todos" ? "Todos os Produtos" : cat;
+  };
+
   return (
     <StoreLayout>
-      <div className="mb-6">
-        <h1 className="text-2xl font-bold text-gray-900">Nossa Loja</h1>
-        <p className="text-gray-500">
-          Encontre os produtos exclusivos selecionados para você
-        </p>
+      <div className="mb-8">
+        <div className="flex items-center gap-2 mb-2">
+          <ShoppingBag className="text-brand-magenta" size={24} />
+          <h1 className="text-2xl font-bold text-gray-900">Nossa Loja</h1>
+        </div>
+        
+        <div className="flex items-center justify-between">
+          <p className="text-gray-500">
+            Encontre os produtos exclusivos selecionados para você
+          </p>
+          
+          <Badge variant="outline" className="bg-white border-brand-magenta text-brand-magenta">
+            {getCategoryLabel(category)}
+          </Badge>
+        </div>
       </div>
 
       {isLoading ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {Array.from({ length: 8 }).map((_, index) => (
-            <div key={index} className="bg-white rounded-xl shadow-sm overflow-hidden">
-              <div className="h-48 bg-gray-200 animate-pulse"></div>
+            <div key={index} className="bg-white rounded-xl shadow-sm overflow-hidden animate-pulse">
+              <div className="h-48 bg-gray-200"></div>
               <div className="p-4 space-y-3">
-                <div className="h-4 bg-gray-200 rounded animate-pulse"></div>
-                <div className="h-4 bg-gray-200 rounded animate-pulse w-2/3"></div>
+                <div className="h-4 bg-gray-200 rounded"></div>
+                <div className="h-4 bg-gray-200 rounded w-2/3"></div>
                 <div className="flex justify-between items-center pt-2">
-                  <div className="h-6 bg-gray-200 rounded animate-pulse w-1/4"></div>
-                  <div className="h-8 bg-gray-200 rounded animate-pulse w-1/4"></div>
+                  <div className="h-6 bg-gray-200 rounded w-1/4"></div>
+                  <div className="h-8 bg-gray-200 rounded w-1/4"></div>
                 </div>
               </div>
             </div>
