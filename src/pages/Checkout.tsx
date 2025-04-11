@@ -8,17 +8,46 @@ import { useCart } from "@/contexts/CartContext";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { ShoppingBag, ArrowLeft, User, Phone } from "lucide-react";
+import { ShoppingBag, ArrowLeft, User, Phone, MapPin, AlertCircle, FileText } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { Textarea } from "@/components/ui/textarea";
 
 const CheckoutPage = () => {
   const { cartItems, totalItems, clearCart } = useCart();
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
+  const [zipCode, setZipCode] = useState("");
+  const [address, setAddress] = useState("");
+  const [observations, setObservations] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [zipCodeError, setZipCodeError] = useState("");
   const navigate = useNavigate();
   const { toast } = useToast();
+
+  const validateZipCode = (value: string) => {
+    // Remove non-numeric characters
+    const numericZipCode = value.replace(/\D/g, '');
+    
+    // Format with hyphen (99999-999)
+    if (numericZipCode.length <= 5) {
+      return numericZipCode;
+    } else {
+      return `${numericZipCode.slice(0, 5)}-${numericZipCode.slice(5, 8)}`;
+    }
+  };
+
+  const handleZipCodeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const formattedZipCode = validateZipCode(e.target.value);
+    setZipCode(formattedZipCode);
+    
+    // Validate ZIP code format
+    if (formattedZipCode.length > 0 && formattedZipCode.replace(/\D/g, '').length !== 8) {
+      setZipCodeError("CEP inválido. Deve conter 8 dígitos.");
+    } else {
+      setZipCodeError("");
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -26,7 +55,16 @@ const CheckoutPage = () => {
     if (!name || !phone) {
       toast({
         title: "Campos obrigatórios",
-        description: "Por favor, preencha todos os campos.",
+        description: "Por favor, preencha todos os campos obrigatórios.",
+        variant: "destructive",
+      });
+      return;
+    }
+    
+    if (zipCode && zipCodeError) {
+      toast({
+        title: "CEP inválido",
+        description: "Por favor, informe um CEP válido para entrega.",
         variant: "destructive",
       });
       return;
@@ -41,6 +79,9 @@ const CheckoutPage = () => {
     sessionStorage.setItem("orderData", JSON.stringify({
       name,
       phone,
+      zipCode: zipCode || "Não informado",
+      address: address || "Não informado",
+      observations: observations || "Nenhuma observação",
       items: cartItems,
       timestamp: new Date().toISOString()
     }));
@@ -115,7 +156,7 @@ const CheckoutPage = () => {
               </CardContent>
             </Card>
 
-            <Card>
+            <Card className="mb-6">
               <CardHeader className="pb-3">
                 <CardTitle className="text-lg font-medium text-gray-900 flex items-center gap-2">
                   <User size={18} className="text-brand-magenta" />
@@ -173,6 +214,93 @@ const CheckoutPage = () => {
                     </Button>
                   </div>
                 </form>
+              </CardContent>
+            </Card>
+
+            <Card className="mb-6">
+              <CardHeader className="pb-3">
+                <CardTitle className="text-lg font-medium text-gray-900 flex items-center gap-2">
+                  <MapPin size={18} className="text-brand-magenta" />
+                  Informações de Entrega
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  <div>
+                    <Label 
+                      htmlFor="zipCode" 
+                      className="font-medium text-gray-700"
+                    >
+                      CEP
+                    </Label>
+                    <div className="relative mt-1 group">
+                      <Input 
+                        id="zipCode"
+                        value={zipCode}
+                        onChange={handleZipCodeChange}
+                        placeholder="00000-000"
+                        className="pl-3 pr-3 py-2 h-11 rounded-lg border border-gray-200 focus-visible:ring-brand-magenta transition-all"
+                        maxLength={9}
+                      />
+                      {zipCodeError && (
+                        <p className="text-red-500 text-xs mt-1">{zipCodeError}</p>
+                      )}
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <Label 
+                      htmlFor="address" 
+                      className="font-medium text-gray-700"
+                    >
+                      Endereço Completo
+                    </Label>
+                    <div className="relative mt-1 group">
+                      <Input 
+                        id="address"
+                        value={address}
+                        onChange={e => setAddress(e.target.value)}
+                        placeholder="Rua, número, complemento, bairro, cidade, estado"
+                        className="pl-3 pr-3 py-2 h-11 rounded-lg border border-gray-200 focus-visible:ring-brand-magenta transition-all"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader className="pb-3">
+                <CardTitle className="text-lg font-medium text-gray-900 flex items-center gap-2">
+                  <FileText size={18} className="text-brand-magenta" />
+                  Observações
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div>
+                  <Label 
+                    htmlFor="observations" 
+                    className="font-medium text-gray-700"
+                  >
+                    Informações adicionais para seu pedido
+                  </Label>
+                  <div className="relative mt-1 group">
+                    <Textarea 
+                      id="observations"
+                      value={observations}
+                      onChange={e => setObservations(e.target.value)}
+                      placeholder="Informações adicionais para entrega ou sobre os produtos"
+                      className="min-h-[100px] border-gray-200 focus-visible:ring-brand-magenta transition-all resize-none"
+                    />
+                  </div>
+                </div>
+
+                <div className="mt-6 flex items-start gap-2 p-3 bg-amber-50 border border-amber-200 rounded-md text-amber-800">
+                  <AlertCircle className="h-5 w-5 flex-shrink-0 mt-0.5" />
+                  <p className="text-sm">
+                    Os itens selecionados estão sujeitos à confirmação de estoque e serão reservados em um momento posterior à conclusão da compra.
+                  </p>
+                </div>
               </CardContent>
             </Card>
           </div>
