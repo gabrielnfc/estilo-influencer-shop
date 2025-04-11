@@ -19,7 +19,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children, className }) => {
       </main>
       
       {/* Subtle background pattern */}
-      <div className="fixed inset-0 -z-10 bg-grid-white pointer-events-none" />
+      <div className="fixed inset-0 -z-10 bg-grid-white pointer-events-none dark:opacity-20" />
     </div>
   );
 };

@@ -25,7 +25,7 @@ export function ThemeToggle() {
           <span className="sr-only">Alternar tema</span>
         </Button>
       </TooltipTrigger>
-      <TooltipContent side="bottom">
+      <TooltipContent side="bottom" className="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100">
         <p>Alternar tema</p>
       </TooltipContent>
     </Tooltip>

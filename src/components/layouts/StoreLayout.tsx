@@ -54,7 +54,7 @@ const StoreLayout: React.FC<StoreLayoutProps> = ({ children }) => {
       </div>
       
       {/* Subtle background pattern */}
-      <div className="fixed inset-0 -z-10 bg-grid-white pointer-events-none opacity-30" />
+      <div className="fixed inset-0 -z-10 bg-grid-white pointer-events-none opacity-30 dark:opacity-10" />
     </div>
   );
 };
