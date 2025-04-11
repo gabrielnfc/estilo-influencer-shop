@@ -1,8 +1,10 @@
 
 import React, { useState } from "react";
-import { Menu, X, ShoppingBag } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import Header from "@/components/ui/Header";
 import CategorySidebar from "@/components/store/CategorySidebar";
+import { useTheme } from "@/contexts/ThemeContext";
+import { cn } from "@/lib/utils";
 
 interface StoreLayoutProps {
   children: React.ReactNode;
@@ -10,11 +12,17 @@ interface StoreLayoutProps {
 
 const StoreLayout: React.FC<StoreLayoutProps> = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const { theme } = useTheme();
   
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-white to-gray-50">
+    <div className={cn(
+      "min-h-screen flex flex-col",
+      theme === "dark" 
+        ? "bg-gradient-to-br from-gray-900 to-gray-800" 
+        : "bg-gradient-to-br from-white to-gray-50"
+    )}>
       <Header />
       
       <div className="flex flex-1">
@@ -31,7 +39,9 @@ const StoreLayout: React.FC<StoreLayoutProps> = ({ children }) => {
         <div className={`
           lg:w-64 lg:flex-shrink-0 transition-all duration-300
           fixed lg:relative z-40 h-full 
-          bg-white border-r border-gray-100 shadow-sm
+          ${theme === "dark" 
+            ? "bg-gray-800 border-r border-gray-700 shadow-sm" 
+            : "bg-white border-r border-gray-100 shadow-sm"}
           ${sidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}
         `}>
           <CategorySidebar />
@@ -54,7 +64,10 @@ const StoreLayout: React.FC<StoreLayoutProps> = ({ children }) => {
       </div>
       
       {/* Subtle background pattern */}
-      <div className="fixed inset-0 -z-10 bg-grid-white pointer-events-none opacity-30" />
+      <div className={cn(
+        "fixed inset-0 -z-10 pointer-events-none opacity-30",
+        theme === "dark" ? "bg-grid-dark" : "bg-grid-white"
+      )} />
     </div>
   );
 };

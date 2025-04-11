@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { Layers, Tag, ShoppingBag } from "lucide-react";
+import { useTheme } from "@/contexts/ThemeContext";
 
 // Sample product categories
 const categories = [
@@ -24,6 +25,7 @@ const CategorySidebar = ({ className }: CategorySidebarProps) => {
   const [searchParams] = useSearchParams();
   const [activeCategory, setActiveCategory] = useState("todos");
   const navigate = useNavigate();
+  const { theme } = useTheme();
 
   useEffect(() => {
     const category = searchParams.get("category") || "todos";
@@ -37,7 +39,8 @@ const CategorySidebar = ({ className }: CategorySidebarProps) => {
 
   return (
     <aside className={cn(
-      "h-full bg-white p-6 overflow-y-auto",
+      "h-full p-6 overflow-y-auto",
+      theme === "dark" ? "bg-gray-800 text-gray-100" : "bg-white text-gray-800",
       className
     )}>
       <div className="flex items-center gap-2 mb-6">
@@ -58,13 +61,23 @@ const CategorySidebar = ({ className }: CategorySidebarProps) => {
               "w-full text-left px-4 py-3 rounded-lg transition-all flex items-center gap-3 group",
               activeCategory === category.slug
                 ? "bg-brand-magenta/10 text-brand-magenta font-medium shadow-sm"
-                : "text-gray-600 hover:bg-gray-50"
+                : theme === "dark" 
+                  ? "text-gray-300 hover:bg-gray-700" 
+                  : "text-gray-600 hover:bg-gray-50"
             )}
           >
             {activeCategory === category.slug ? (
               <Tag size={16} className="text-brand-magenta" />
             ) : (
-              <Layers size={16} className="text-gray-400 group-hover:text-gray-600 transition-colors" />
+              <Layers 
+                size={16} 
+                className={cn(
+                  "transition-colors", 
+                  theme === "dark" 
+                    ? "text-gray-500 group-hover:text-gray-300" 
+                    : "text-gray-400 group-hover:text-gray-600"
+                )} 
+              />
             )}
             <span className={cn(
               "transition-all",
@@ -77,9 +90,24 @@ const CategorySidebar = ({ className }: CategorySidebarProps) => {
       </nav>
       
       {/* Decorative element */}
-      <div className="mt-10 rounded-lg bg-gradient-to-br from-brand-magenta/5 to-brand-orange/5 p-4 border border-gray-100">
-        <p className="text-sm text-gray-500 mb-2">Nossa seleção exclusiva</p>
-        <p className="text-xs text-gray-400">Produtos selecionados especialmente para você.</p>
+      <div className={cn(
+        "mt-10 rounded-lg p-4 border",
+        theme === "dark" 
+          ? "bg-gradient-to-br from-brand-magenta/5 to-brand-orange/5 border-gray-700" 
+          : "bg-gradient-to-br from-brand-magenta/5 to-brand-orange/5 border-gray-100"
+      )}>
+        <p className={cn(
+          "text-sm mb-2",
+          theme === "dark" ? "text-gray-400" : "text-gray-500"
+        )}>
+          Nossa seleção exclusiva
+        </p>
+        <p className={cn(
+          "text-xs",
+          theme === "dark" ? "text-gray-500" : "text-gray-400"
+        )}>
+          Produtos selecionados especialmente para você.
+        </p>
       </div>
     </aside>
   );

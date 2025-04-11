@@ -44,6 +44,45 @@
     --sidebar-border: 240 5.9% 90%;
     --sidebar-ring: 348 83% 47%;
   }
+
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 348 83% 47%;
+    --primary-foreground: 355 100% 97%;
+
+    --secondary: 14 100% 57%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 348 83% 47%;
+
+    --sidebar-background: 240 10% 3.9%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 348 83% 47%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 348 83% 47%;
+  }
 }
 
 @layer base {
@@ -87,12 +126,12 @@
   }
   
   .card-gradient-border > div {
-    @apply bg-white rounded-[calc(0.75rem-2px)] overflow-hidden;
+    @apply bg-white dark:bg-gray-800 rounded-[calc(0.75rem-2px)] overflow-hidden;
   }
   
   /* Glass morphism effect */
   .glass-effect {
-    @apply backdrop-blur-md bg-white/80 border border-white/50 shadow-sm;
+    @apply backdrop-blur-md bg-white/80 dark:bg-gray-800/80 border border-white/50 dark:border-white/10 shadow-sm;
   }
   
   /* Modern gradient backgrounds */
@@ -101,7 +140,7 @@
   }
   
   .bg-gradient-light {
-    @apply bg-gradient-to-br from-white to-gray-50;
+    @apply bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900;
   }
   
   /* Transitions for product cards and UI elements */
@@ -113,6 +152,10 @@
 @layer utilities {
   .bg-grid-white {
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(255 255 255 / 0.05)'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e");
+  }
+  
+  .bg-grid-dark {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(255 255 255 / 0.1)'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e");
   }
   
   .animate-text {
@@ -149,6 +192,15 @@
     animation: shimmerAnimation 1.5s infinite;
   }
 
+  .dark .shimmer {
+    background: linear-gradient(90deg, 
+      rgba(255, 255, 255, 0) 0%, 
+      rgba(255, 255, 255, 0.2) 50%, 
+      rgba(255, 255, 255, 0) 100%);
+    background-size: 200% 100%;
+    animation: shimmerAnimation 1.5s infinite;
+  }
+
   @keyframes shimmerAnimation {
     0% { background-position: -200% 0; }
     100% { background-position: 200% 0; }
@@ -158,6 +210,10 @@
   .scrollbar-thin {
     scrollbar-width: thin;
     scrollbar-color: rgba(203, 213, 225, 0.5) transparent;
+  }
+  
+  .dark .scrollbar-thin {
+    scrollbar-color: rgba(75, 85, 99, 0.5) transparent;
   }
   
   .scrollbar-thin::-webkit-scrollbar {
@@ -172,6 +228,10 @@
   .scrollbar-thin::-webkit-scrollbar-thumb {
     background-color: rgba(203, 213, 225, 0.5);
     border-radius: 20px;
+  }
+  
+  .dark .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: rgba(75, 85, 99, 0.5);
   }
   
   /* Hover effects for buttons and interactive elements */

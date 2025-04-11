@@ -16,12 +16,16 @@ import {
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import NotificationsDropdown from "./NotificationsDropdown";
+import ThemeToggle from "./ThemeToggle";
+import { useTheme } from "@/contexts/ThemeContext";
+import { cn } from "@/lib/utils";
 
 const Header = () => {
   const { isAuthenticated, logout, user } = useAuth();
   const { totalItems, totalPrice } = useCart();
   const { favorites } = useFavorites();
   const [logoSrc, setLogoSrc] = useState("/lovable-uploads/ab795641-0b7b-4946-b1fc-cb5b0efe542d.png");
+  const { theme } = useTheme();
 
   if (!isAuthenticated) return null;
 
@@ -31,7 +35,12 @@ const Header = () => {
   }).format(totalPrice);
 
   return (
-    <header className="bg-white border-b border-gray-100 py-3 px-4 md:px-6 shadow-sm sticky top-0 z-10">
+    <header className={cn(
+      "border-b py-3 px-4 md:px-6 shadow-sm sticky top-0 z-10",
+      theme === "dark" 
+        ? "bg-gray-800 border-gray-700 text-white" 
+        : "bg-white border-gray-100 text-gray-900"
+    )}>
       <div className="container mx-auto flex items-center justify-between">
         <Link to="/store" className="flex items-center space-x-2">
           <div className="relative">
@@ -51,11 +60,15 @@ const Header = () => {
         </Link>
         
         <div className="flex items-center space-x-1 sm:space-x-3">
+          {/* Theme Toggle */}
+          <ThemeToggle />
+        
           <Link to="/favorites">
             <Button 
               variant="ghost" 
               size="icon" 
-              className={`relative ${favorites.length > 0 ? 'text-brand-magenta' : 'text-gray-600'}`} 
+              className={`relative ${favorites.length > 0 ? 'text-brand-magenta' : 
+                theme === "dark" ? 'text-gray-300' : 'text-gray-600'}`} 
               aria-label="Favoritos"
             >
               <Heart className="h-5 w-5" />
@@ -67,14 +80,14 @@ const Header = () => {
             </Button>
           </Link>
           
-          {/* Substituindo o botão de notificações pelo novo dropdown */}
           <NotificationsDropdown />
           
           <Link to="/checkout" className="relative">
             <Button 
               variant="ghost" 
               size="icon" 
-              className={`relative ${totalItems > 0 ? 'text-brand-magenta' : 'text-gray-600'}`} 
+              className={`relative ${totalItems > 0 ? 'text-brand-magenta' : 
+                theme === "dark" ? 'text-gray-300' : 'text-gray-600'}`} 
               aria-label="Carrinho"
             >
               <ShoppingCart className="h-5 w-5" />
@@ -87,7 +100,12 @@ const Header = () => {
             
             {/* Cart price preview */}
             {totalItems > 0 && (
-              <div className="hidden sm:block absolute top-full right-0 mt-1 bg-white rounded-md py-1 px-2 text-xs font-medium text-brand-magenta border border-gray-100 shadow-sm">
+              <div className={cn(
+                "hidden sm:block absolute top-full right-0 mt-1 rounded-md py-1 px-2 text-xs font-medium border shadow-sm",
+                theme === "dark" 
+                  ? "bg-gray-800 text-brand-magenta border-gray-700" 
+                  : "bg-white text-brand-magenta border-gray-100"
+              )}>
                 {formattedTotal}
               </div>
             )}
@@ -95,8 +113,18 @@ const Header = () => {
           
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="icon" className="rounded-full bg-gray-50">
-                <User className="h-5 w-5 text-gray-700" />
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                className={cn(
+                  "rounded-full",
+                  theme === "dark" ? "bg-gray-700" : "bg-gray-50"
+                )}
+              >
+                <User className={cn(
+                  "h-5 w-5", 
+                  theme === "dark" ? "text-gray-300" : "text-gray-700"
+                )} />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-56">
