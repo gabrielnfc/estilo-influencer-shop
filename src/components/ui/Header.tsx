@@ -105,9 +105,11 @@ const Header = () => {
               <DropdownMenuItem className="text-sm">
                 {user?.email}
               </DropdownMenuItem>
-              <DropdownMenuItem className="flex items-center cursor-pointer">
-                <History className="mr-2 h-4 w-4" />
-                <span>Histórico de Compras</span>
+              <DropdownMenuItem asChild className="flex items-center cursor-pointer">
+                <Link to="/purchase-history">
+                  <History className="mr-2 h-4 w-4" />
+                  <span>Histórico de Compras</span>
+                </Link>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem onClick={logout} className="text-red-500 cursor-pointer">

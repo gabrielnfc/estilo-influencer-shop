@@ -14,6 +14,7 @@ import StorePage from "./pages/Store";
 import CheckoutPage from "./pages/Checkout";
 import ConfirmationPage from "./pages/Confirmation";
 import FavoritesPage from "./pages/Favorites";
+import PurchaseHistoryPage from "./pages/PurchaseHistory";
 import NotFound from "./pages/NotFound";
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -38,6 +39,7 @@ const App = () => (
                     <Route path="/checkout" element={<CheckoutPage />} />
                     <Route path="/confirmation" element={<ConfirmationPage />} />
                     <Route path="/favorites" element={<FavoritesPage />} />
+                    <Route path="/purchase-history" element={<PurchaseHistoryPage />} />
                   </Route>
                   
                   <Route path="*" element={<NotFound />} />
