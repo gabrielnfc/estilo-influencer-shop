@@ -1,5 +1,5 @@
 
-import { ShoppingCart, LogOut, User, Heart } from "lucide-react";
+import { ShoppingCart, LogOut, User, Heart, History } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useCart } from "@/contexts/CartContext";
 import { useFavorites } from "@/contexts/FavoritesContext";
@@ -100,10 +100,14 @@ const Header = () => {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-56">
-              <DropdownMenuLabel>Minha Conta</DropdownMenuLabel>
+              <DropdownMenuLabel>Área do Cliente</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem className="text-sm">
                 {user?.email}
+              </DropdownMenuItem>
+              <DropdownMenuItem className="flex items-center cursor-pointer">
+                <History className="mr-2 h-4 w-4" />
+                <span>Histórico de Compras</span>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem onClick={logout} className="text-red-500 cursor-pointer">
