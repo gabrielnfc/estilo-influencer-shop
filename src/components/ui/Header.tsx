@@ -1,5 +1,5 @@
 
-import { ShoppingCart, LogOut, User, Heart, Bell } from "lucide-react";
+import { ShoppingCart, LogOut, User, Heart } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useCart } from "@/contexts/CartContext";
 import { useFavorites } from "@/contexts/FavoritesContext";
@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import NotificationsDropdown from "./NotificationsDropdown";
 
 const Header = () => {
   const { isAuthenticated, logout, user } = useAuth();
@@ -66,9 +67,8 @@ const Header = () => {
             </Button>
           </Link>
           
-          <Button variant="ghost" size="icon" className="text-gray-600" aria-label="Notificações">
-            <Bell className="h-5 w-5" />
-          </Button>
+          {/* Substituindo o botão de notificações pelo novo dropdown */}
+          <NotificationsDropdown />
           
           <Link to="/checkout" className="relative">
             <Button 

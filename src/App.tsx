@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { CartProvider } from "./contexts/CartContext";
 import { AuthProvider } from "./contexts/AuthContext";
 import { FavoritesProvider } from "./contexts/FavoritesContext";
+import { NotificationsProvider } from "./contexts/NotificationsContext";
 
 import LoginPage from "./pages/Login";
 import StorePage from "./pages/Store";
@@ -23,25 +24,27 @@ const App = () => (
     <AuthProvider>
       <CartProvider>
         <FavoritesProvider>
-          <TooltipProvider>
-            <Toaster />
-            <Sonner />
-            <BrowserRouter>
-              <Routes>
-                <Route path="/login" element={<LoginPage />} />
-                <Route path="/" element={<Navigate to="/store" replace />} />
-                
-                <Route element={<ProtectedRoute />}>
-                  <Route path="/store" element={<StorePage />} />
-                  <Route path="/checkout" element={<CheckoutPage />} />
-                  <Route path="/confirmation" element={<ConfirmationPage />} />
-                  <Route path="/favorites" element={<FavoritesPage />} />
-                </Route>
-                
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </BrowserRouter>
-          </TooltipProvider>
+          <NotificationsProvider>
+            <TooltipProvider>
+              <Toaster />
+              <Sonner />
+              <BrowserRouter>
+                <Routes>
+                  <Route path="/login" element={<LoginPage />} />
+                  <Route path="/" element={<Navigate to="/store" replace />} />
+                  
+                  <Route element={<ProtectedRoute />}>
+                    <Route path="/store" element={<StorePage />} />
+                    <Route path="/checkout" element={<CheckoutPage />} />
+                    <Route path="/confirmation" element={<ConfirmationPage />} />
+                    <Route path="/favorites" element={<FavoritesPage />} />
+                  </Route>
+                  
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </BrowserRouter>
+            </TooltipProvider>
+          </NotificationsProvider>
         </FavoritesProvider>
       </CartProvider>
     </AuthProvider>
