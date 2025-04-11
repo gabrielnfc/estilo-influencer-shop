@@ -1,6 +1,6 @@
 
 import { useState, useMemo } from "react";
-import { Search, ArrowDownAZ, ArrowDownZA, ArrowUpDown, X } from "lucide-react";
+import { Search, ArrowDownAZ, ArrowDownZA, ArrowUpDown, X, ChevronDown } from "lucide-react";
 import ProductCard from "./ProductCard";
 import { Product } from "@/contexts/CartContext";
 import { Input } from "@/components/ui/input";
@@ -14,9 +14,12 @@ interface ProductGridProps {
 
 type SortOption = "name-asc" | "name-desc" | "price-asc" | "price-desc";
 
+const PRODUCTS_PER_PAGE = 8; // Número de produtos exibidos inicialmente
+
 const ProductGrid = ({ products, category }: ProductGridProps) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [sortBy, setSortBy] = useState<SortOption>("name-asc");
+  const [visibleProducts, setVisibleProducts] = useState(PRODUCTS_PER_PAGE);
   
   const getSortIcon = (currentSort: SortOption) => {
     switch (currentSort) {
@@ -72,6 +75,12 @@ const ProductGrid = ({ products, category }: ProductGridProps) => {
     setSearchQuery("");
     setSortBy("name-asc");
   };
+
+  const loadMoreProducts = () => {
+    setVisibleProducts(prev => prev + PRODUCTS_PER_PAGE);
+  };
+
+  const hasMoreProducts = filteredAndSortedProducts.length > visibleProducts;
 
   return (
     <div className="space-y-6">
@@ -175,17 +184,32 @@ const ProductGrid = ({ products, category }: ProductGridProps) => {
           </Button>
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {filteredAndSortedProducts.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
+        <div className="space-y-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {filteredAndSortedProducts.slice(0, visibleProducts).map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+          
+          {hasMoreProducts && (
+            <div className="flex justify-center pt-4">
+              <Button 
+                onClick={loadMoreProducts} 
+                variant="outline" 
+                className="border-brand-magenta text-brand-magenta hover:bg-brand-magenta/10"
+              >
+                Carregar mais produtos
+                <ChevronDown size={16} className="ml-1" />
+              </Button>
+            </div>
+          )}
         </div>
       )}
       
       {filteredAndSortedProducts.length > 0 && (
         <div className="flex justify-center">
           <p className="text-gray-500 text-sm">
-            Exibindo {filteredAndSortedProducts.length} produto(s)
+            Exibindo {Math.min(visibleProducts, filteredAndSortedProducts.length)} de {filteredAndSortedProducts.length} produto(s)
           </p>
         </div>
       )}
