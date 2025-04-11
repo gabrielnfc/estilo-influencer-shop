@@ -14,7 +14,7 @@ const StoreLayout: React.FC<StoreLayoutProps> = ({ children }) => {
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-white to-gray-50">
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-white to-gray-50 dark:from-gray-900 dark:to-gray-950">
       <Header />
       
       <div className="flex flex-1">
@@ -31,7 +31,7 @@ const StoreLayout: React.FC<StoreLayoutProps> = ({ children }) => {
         <div className={`
           lg:w-64 lg:flex-shrink-0 transition-all duration-300
           fixed lg:relative z-40 h-full 
-          bg-white border-r border-gray-100 shadow-sm
+          bg-white dark:bg-gray-900 border-r border-gray-100 dark:border-gray-800 shadow-sm
           ${sidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}
         `}>
           <CategorySidebar />
