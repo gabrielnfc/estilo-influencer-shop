@@ -1,0 +1,43 @@
+
+@layer components {
+  .card-hover-effect {
+    @apply transition-all duration-300 hover:shadow-md hover:-translate-y-1;
+  }
+  
+  .btn-primary {
+    @apply bg-brand-magenta text-white hover:bg-brand-magenta/90 rounded-md px-4 py-2 font-medium transition-colors;
+  }
+  
+  .btn-secondary {
+    @apply bg-brand-orange text-white hover:bg-brand-orange/90 rounded-md px-4 py-2 font-medium transition-colors;
+  }
+  
+  .social-icon-hover {
+    @apply transition-transform hover:scale-110 hover:rotate-3;
+  }
+  
+  .card-gradient-border {
+    @apply relative rounded-lg p-0.5 overflow-hidden;
+    background: linear-gradient(to right, #E91E63, #FF5722);
+  }
+  
+  .card-gradient-border > div {
+    @apply bg-white dark:bg-gray-900 rounded-[calc(0.75rem-2px)] overflow-hidden;
+  }
+  
+  .glass-effect {
+    @apply backdrop-blur-md bg-white/80 dark:bg-black/50 border border-white/50 dark:border-white/10 shadow-sm;
+  }
+  
+  .bg-gradient-brand {
+    @apply bg-gradient-to-br from-brand-magenta to-brand-orange;
+  }
+  
+  .bg-gradient-light {
+    @apply bg-gradient-to-br from-white to-gray-50 dark:from-gray-900 dark:to-gray-800;
+  }
+  
+  .transition-smooth {
+    @apply transition-all duration-300 ease-in-out;
+  }
+}
