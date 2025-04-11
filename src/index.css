@@ -70,3 +70,34 @@
     @apply bg-brand-orange text-white hover:bg-brand-orange/90 rounded-md px-4 py-2 font-medium transition-colors;
   }
 }
+
+@layer utilities {
+  .bg-grid-white {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(255 255 255 / 0.05)'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e");
+  }
+  
+  .animate-text {
+    background-size: 300% 300%;
+    animation: textAnimation 8s ease infinite;
+  }
+
+  @keyframes textAnimation {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+  
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 0.1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.15;
+      transform: scale(1.1);
+    }
+  }
+}
