@@ -20,8 +20,10 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     
     if (savedTheme) {
       setTheme(savedTheme);
+      document.documentElement.classList.toggle("dark", savedTheme === "dark");
     } else if (prefersDark) {
       setTheme("dark");
+      document.documentElement.classList.add("dark");
     }
   }, []);
 

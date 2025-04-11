@@ -46,7 +46,7 @@ const StoreLayout: React.FC<StoreLayoutProps> = ({ children }) => {
         )}
         
         {/* Main content */}
-        <main className="flex-1 px-4 py-6 md:px-6 overflow-y-auto">
+        <main className="flex-1 px-4 py-6 md:px-6 overflow-y-auto dark:bg-gray-900">
           <div className="max-w-7xl mx-auto w-full">
             {children}
           </div>
@@ -54,7 +54,7 @@ const StoreLayout: React.FC<StoreLayoutProps> = ({ children }) => {
       </div>
       
       {/* Subtle background pattern */}
-      <div className="fixed inset-0 -z-10 bg-grid-white pointer-events-none opacity-30 dark:opacity-10" />
+      <div className="fixed inset-0 -z-10 bg-grid-white pointer-events-none opacity-30 dark:opacity-5" />
     </div>
   );
 };

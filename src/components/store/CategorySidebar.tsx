@@ -37,11 +37,11 @@ const CategorySidebar = ({ className }: CategorySidebarProps) => {
 
   return (
     <aside className={cn(
-      "h-full bg-white p-6 overflow-y-auto",
+      "h-full bg-white dark:bg-gray-900 p-6 overflow-y-auto",
       className
     )}>
       <div className="flex items-center gap-2 mb-6">
-        <div className="h-10 w-10 rounded-full bg-brand-magenta/10 flex items-center justify-center">
+        <div className="h-10 w-10 rounded-full bg-brand-magenta/10 dark:bg-brand-magenta/20 flex items-center justify-center">
           <ShoppingBag size={20} className="text-brand-magenta" />
         </div>
         <h2 className="text-xl font-bold bg-gradient-to-r from-brand-magenta to-brand-orange bg-clip-text text-transparent">
@@ -57,14 +57,14 @@ const CategorySidebar = ({ className }: CategorySidebarProps) => {
             className={cn(
               "w-full text-left px-4 py-3 rounded-lg transition-all flex items-center gap-3 group",
               activeCategory === category.slug
-                ? "bg-brand-magenta/10 text-brand-magenta font-medium shadow-sm"
-                : "text-gray-600 hover:bg-gray-50"
+                ? "bg-brand-magenta/10 text-brand-magenta font-medium shadow-sm dark:bg-brand-magenta/20"
+                : "text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800"
             )}
           >
             {activeCategory === category.slug ? (
               <Tag size={16} className="text-brand-magenta" />
             ) : (
-              <Layers size={16} className="text-gray-400 group-hover:text-gray-600 transition-colors" />
+              <Layers size={16} className="text-gray-400 dark:text-gray-500 group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-colors" />
             )}
             <span className={cn(
               "transition-all",
@@ -77,9 +77,9 @@ const CategorySidebar = ({ className }: CategorySidebarProps) => {
       </nav>
       
       {/* Decorative element */}
-      <div className="mt-10 rounded-lg bg-gradient-to-br from-brand-magenta/5 to-brand-orange/5 p-4 border border-gray-100">
-        <p className="text-sm text-gray-500 mb-2">Nossa seleção exclusiva</p>
-        <p className="text-xs text-gray-400">Produtos selecionados especialmente para você.</p>
+      <div className="mt-10 rounded-lg bg-gradient-to-br from-brand-magenta/5 to-brand-orange/5 p-4 border border-gray-100 dark:border-gray-800 dark:from-brand-magenta/10 dark:to-brand-orange/10">
+        <p className="text-sm text-gray-500 dark:text-gray-300 mb-2">Nossa seleção exclusiva</p>
+        <p className="text-xs text-gray-400 dark:text-gray-400">Produtos selecionados especialmente para você.</p>
       </div>
     </aside>
   );
