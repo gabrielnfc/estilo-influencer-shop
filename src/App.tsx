@@ -18,6 +18,14 @@ import PurchaseHistoryPage from "./pages/PurchaseHistory";
 import NotFound from "./pages/NotFound";
 import ProtectedRoute from "./components/ProtectedRoute";
 
+// Update the Product type in the CartContext to include code and unit
+declare module "./contexts/CartContext" {
+  interface Product {
+    code?: string;
+    unit?: string;
+  }
+}
+
 const queryClient = new QueryClient();
 
 const App = () => (

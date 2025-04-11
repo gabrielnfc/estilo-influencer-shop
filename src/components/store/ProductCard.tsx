@@ -108,6 +108,12 @@ const ProductCard = ({ product }: ProductCardProps) => {
           {product.name}
         </h3>
         
+        <div className="flex items-center text-xs text-gray-500 mb-2">
+          <span className="mr-1">Cód. {product.code || product.id}</span>
+          <span className="mx-1">•</span>
+          <span>{product.unit || 'UN'}</span>
+        </div>
+        
         <div className="flex items-center justify-between mt-3">
           <div>
             <span className="text-brand-magenta font-bold text-lg">{formattedPrice}</span>

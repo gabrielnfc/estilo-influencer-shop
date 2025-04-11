@@ -14,84 +14,108 @@ const productData: Product[] = [
     name: "Base Líquida Ultra HD",
     price: 89.90,
     category: "Maquiagem",
-    image: "https://images.unsplash.com/photo-1596704017254-9a89b5d155cc?auto=format&fit=crop&w=800&q=80"
+    image: "https://images.unsplash.com/photo-1596704017254-9a89b5d155cc?auto=format&fit=crop&w=800&q=80",
+    code: "1001",
+    unit: "UN"
   },
   {
     id: 2,
     name: "Sérum Facial Vitamina C",
     price: 129.90,
     category: "Skincare",
-    image: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=800&q=80"
+    image: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=800&q=80",
+    code: "1002",
+    unit: "UN"
   },
   {
     id: 3,
     name: "Máscara para Cílios Volume",
     price: 69.90,
     category: "Maquiagem",
-    image: "https://images.unsplash.com/photo-1631730359585-38a4935cbcec?auto=format&fit=crop&w=800&q=80"
+    image: "https://images.unsplash.com/photo-1631730359585-38a4935cbcec?auto=format&fit=crop&w=800&q=80",
+    code: "1003",
+    unit: "UN"
   },
   {
     id: 4,
     name: "Shampoo Hidratante",
     price: 59.90,
     category: "Cabelo",
-    image: "https://images.unsplash.com/photo-1626618012641-319588c8a40d?auto=format&fit=crop&w=800&q=80"
+    image: "https://images.unsplash.com/photo-1626618012641-319588c8a40d?auto=format&fit=crop&w=800&q=80",
+    code: "1004",
+    unit: "ML"
   },
   {
     id: 5,
     name: "Hidratante Corporal",
     price: 49.90,
     category: "Corpo & Banho",
-    image: "https://images.unsplash.com/photo-1556228578-8d89a1dde6a8?auto=format&fit=crop&w=800&q=80"
+    image: "https://images.unsplash.com/photo-1556228578-8d89a1dde6a8?auto=format&fit=crop&w=800&q=80",
+    code: "1005",
+    unit: "ML"
   },
   {
     id: 6,
     name: "Perfume Floral Intenso",
     price: 199.90,
     category: "Fragrâncias",
-    image: "https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&w=800&q=80"
+    image: "https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&w=800&q=80",
+    code: "1006",
+    unit: "ML"
   },
   {
     id: 7,
     name: "Colágeno em Pó",
     price: 89.90,
     category: "Suplementos",
-    image: "https://images.unsplash.com/photo-1612531047288-7b0622429779?auto=format&fit=crop&w=800&q=80"
+    image: "https://images.unsplash.com/photo-1612531047288-7b0622429779?auto=format&fit=crop&w=800&q=80",
+    code: "1007",
+    unit: "G"
   },
   {
     id: 8,
     name: "Kit Pincéis Maquiagem",
     price: 149.90,
     category: "Acessórios",
-    image: "https://images.unsplash.com/photo-1522336572468-97b06e8ef143?auto=format&fit=crop&w=800&q=80"
+    image: "https://images.unsplash.com/photo-1522336572468-97b06e8ef143?auto=format&fit=crop&w=800&q=80",
+    code: "1008",
+    unit: "KIT"
   },
   {
     id: 9,
     name: "Protetor Solar FPS 50",
     price: 79.90,
     category: "Skincare",
-    image: "https://images.unsplash.com/photo-1556227834-09f1de7a7d14?auto=format&fit=crop&w=800&q=80"
+    image: "https://images.unsplash.com/photo-1556227834-09f1de7a7d14?auto=format&fit=crop&w=800&q=80",
+    code: "1009",
+    unit: "ML"
   },
   {
     id: 10,
     name: "Batom Matte Longa Duração",
     price: 39.90,
     category: "Maquiagem",
-    image: "https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=800&q=80"
+    image: "https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=800&q=80",
+    code: "1010",
+    unit: "UN"
   },
   {
     id: 11,
     name: "Máscara Capilar Reparadora",
     price: 69.90,
     category: "Cabelo",
-    image: "https://images.unsplash.com/photo-1535585209827-a15fcdbc4c2d?auto=format&fit=crop&w=800&q=80"
+    image: "https://images.unsplash.com/photo-1535585209827-a15fcdbc4c2d?auto=format&fit=crop&w=800&q=80",
+    code: "1011",
+    unit: "G"
   },
   {
     id: 12,
     name: "Óleo Corporal Hidratante",
     price: 59.90,
     category: "Corpo & Banho",
-    image: "https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?auto=format&fit=crop&w=800&q=80"
+    image: "https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?auto=format&fit=crop&w=800&q=80",
+    code: "1012",
+    unit: "ML"
   }
 ];
 
