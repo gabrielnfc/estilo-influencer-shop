@@ -6,11 +6,13 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { CartProvider } from "./contexts/CartContext";
 import { AuthProvider } from "./contexts/AuthContext";
+import { FavoritesProvider } from "./contexts/FavoritesContext";
 
 import LoginPage from "./pages/Login";
 import StorePage from "./pages/Store";
 import CheckoutPage from "./pages/Checkout";
 import ConfirmationPage from "./pages/Confirmation";
+import FavoritesPage from "./pages/Favorites";
 import NotFound from "./pages/NotFound";
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -20,24 +22,27 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <AuthProvider>
       <CartProvider>
-        <TooltipProvider>
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
-            <Routes>
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/" element={<Navigate to="/store" replace />} />
-              
-              <Route element={<ProtectedRoute />}>
-                <Route path="/store" element={<StorePage />} />
-                <Route path="/checkout" element={<CheckoutPage />} />
-                <Route path="/confirmation" element={<ConfirmationPage />} />
-              </Route>
-              
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </BrowserRouter>
-        </TooltipProvider>
+        <FavoritesProvider>
+          <TooltipProvider>
+            <Toaster />
+            <Sonner />
+            <BrowserRouter>
+              <Routes>
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/" element={<Navigate to="/store" replace />} />
+                
+                <Route element={<ProtectedRoute />}>
+                  <Route path="/store" element={<StorePage />} />
+                  <Route path="/checkout" element={<CheckoutPage />} />
+                  <Route path="/confirmation" element={<ConfirmationPage />} />
+                  <Route path="/favorites" element={<FavoritesPage />} />
+                </Route>
+                
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </BrowserRouter>
+          </TooltipProvider>
+        </FavoritesProvider>
       </CartProvider>
     </AuthProvider>
   </QueryClientProvider>

@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Product, useCart } from "@/contexts/CartContext";
 import { useToast } from "@/hooks/use-toast";
 import { Badge } from "@/components/ui/badge";
+import { useFavorites } from "@/contexts/FavoritesContext";
 
 interface ProductCardProps {
   product: Product;
@@ -12,8 +13,8 @@ interface ProductCardProps {
 
 const ProductCard = ({ product }: ProductCardProps) => {
   const { addToCart, cartItems } = useCart();
+  const { isFavorite, addToFavorites, removeFromFavorites } = useFavorites();
   const [isHovered, setIsHovered] = useState(false);
-  const [isLiked, setIsLiked] = useState(false);
   const [isImageLoaded, setIsImageLoaded] = useState(false);
   const { toast } = useToast();
   
@@ -24,14 +25,13 @@ const ProductCard = ({ product }: ProductCardProps) => {
 
   const cartItem = cartItems.find(item => item.id === product.id);
   const itemInCart = cartItem ? cartItem.quantity : 0;
+  const isLiked = isFavorite(product.id);
 
   const handleLike = () => {
-    setIsLiked(!isLiked);
-    if (!isLiked) {
-      toast({
-        title: "Produto favoritado",
-        description: `${product.name} foi adicionado aos seus favoritos.`,
-      });
+    if (isLiked) {
+      removeFromFavorites(product.id);
+    } else {
+      addToFavorites(product);
     }
   };
 

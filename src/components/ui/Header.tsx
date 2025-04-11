@@ -2,6 +2,7 @@
 import { ShoppingCart, LogOut, User, Heart, Bell } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useCart } from "@/contexts/CartContext";
+import { useFavorites } from "@/contexts/FavoritesContext";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { 
@@ -18,6 +19,7 @@ import { Badge } from "@/components/ui/badge";
 const Header = () => {
   const { isAuthenticated, logout, user } = useAuth();
   const { totalItems, totalPrice } = useCart();
+  const { favorites } = useFavorites();
   const [logoSrc, setLogoSrc] = useState("/lovable-uploads/ab795641-0b7b-4946-b1fc-cb5b0efe542d.png");
 
   if (!isAuthenticated) return null;
@@ -48,9 +50,21 @@ const Header = () => {
         </Link>
         
         <div className="flex items-center space-x-1 sm:space-x-3">
-          <Button variant="ghost" size="icon" className="text-gray-600" aria-label="Favoritos">
-            <Heart className="h-5 w-5" />
-          </Button>
+          <Link to="/favorites">
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              className={`relative ${favorites.length > 0 ? 'text-brand-magenta' : 'text-gray-600'}`} 
+              aria-label="Favoritos"
+            >
+              <Heart className="h-5 w-5" />
+              {favorites.length > 0 && (
+                <span className="absolute -top-2 -right-2 bg-brand-magenta text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                  {favorites.length}
+                </span>
+              )}
+            </Button>
+          </Link>
           
           <Button variant="ghost" size="icon" className="text-gray-600" aria-label="Notificações">
             <Bell className="h-5 w-5" />
