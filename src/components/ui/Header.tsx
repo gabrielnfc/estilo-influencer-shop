@@ -1,3 +1,4 @@
+
 import { ShoppingCart, LogOut, User, Heart, History } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useCart } from "@/contexts/CartContext";
@@ -15,7 +16,6 @@ import {
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import NotificationsDropdown from "./NotificationsDropdown";
-import { ThemeToggle } from "./ThemeToggle";
 
 const Header = () => {
   const { isAuthenticated, logout, user } = useAuth();
@@ -51,8 +51,6 @@ const Header = () => {
         </Link>
         
         <div className="flex items-center space-x-1 sm:space-x-3">
-          <ThemeToggle />
-          
           <Link to="/favorites">
             <Button 
               variant="ghost" 
@@ -69,6 +67,7 @@ const Header = () => {
             </Button>
           </Link>
           
+          {/* Substituindo o botão de notificações pelo novo dropdown */}
           <NotificationsDropdown />
           
           <Link to="/checkout" className="relative">
@@ -86,6 +85,7 @@ const Header = () => {
               )}
             </Button>
             
+            {/* Cart price preview */}
             {totalItems > 0 && (
               <div className="hidden sm:block absolute top-full right-0 mt-1 bg-white rounded-md py-1 px-2 text-xs font-medium text-brand-magenta border border-gray-100 shadow-sm">
                 {formattedTotal}
@@ -99,19 +99,19 @@ const Header = () => {
                 <User className="h-5 w-5 text-gray-700" />
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-56 bg-white border-gray-100">
-              <DropdownMenuLabel className="text-gray-700">Área do Cliente</DropdownMenuLabel>
-              <DropdownMenuSeparator className="bg-gray-100" />
-              <DropdownMenuItem className="text-sm text-gray-600">
+            <DropdownMenuContent align="end" className="w-56">
+              <DropdownMenuLabel>Área do Cliente</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem className="text-sm">
                 {user?.email}
               </DropdownMenuItem>
-              <DropdownMenuItem asChild className="flex items-center cursor-pointer text-gray-700">
+              <DropdownMenuItem asChild className="flex items-center cursor-pointer">
                 <Link to="/purchase-history">
                   <History className="mr-2 h-4 w-4" />
                   <span>Histórico de Compras</span>
                 </Link>
               </DropdownMenuItem>
-              <DropdownMenuSeparator className="bg-gray-100" />
+              <DropdownMenuSeparator />
               <DropdownMenuItem onClick={logout} className="text-red-500 cursor-pointer">
                 <LogOut className="mr-2 h-4 w-4" />
                 <span>Sair</span>

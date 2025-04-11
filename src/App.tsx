@@ -8,7 +8,6 @@ import { CartProvider } from "./contexts/CartContext";
 import { AuthProvider } from "./contexts/AuthContext";
 import { FavoritesProvider } from "./contexts/FavoritesContext";
 import { NotificationsProvider } from "./contexts/NotificationsContext";
-import { ThemeProvider } from "./contexts/ThemeContext";
 
 import LoginPage from "./pages/Login";
 import StorePage from "./pages/Store";
@@ -32,34 +31,32 @@ const queryClient = new QueryClient();
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <AuthProvider>
-      <ThemeProvider>
-        <CartProvider>
-          <FavoritesProvider>
-            <NotificationsProvider>
-              <TooltipProvider>
-                <Toaster />
-                <Sonner />
-                <BrowserRouter>
-                  <Routes>
-                    <Route path="/login" element={<LoginPage />} />
-                    <Route path="/" element={<Navigate to="/store" replace />} />
-                    
-                    <Route element={<ProtectedRoute />}>
-                      <Route path="/store" element={<StorePage />} />
-                      <Route path="/checkout" element={<CheckoutPage />} />
-                      <Route path="/confirmation" element={<ConfirmationPage />} />
-                      <Route path="/favorites" element={<FavoritesPage />} />
-                      <Route path="/purchase-history" element={<PurchaseHistoryPage />} />
-                    </Route>
-                    
-                    <Route path="*" element={<NotFound />} />
-                  </Routes>
-                </BrowserRouter>
-              </TooltipProvider>
-            </NotificationsProvider>
-          </FavoritesProvider>
-        </CartProvider>
-      </ThemeProvider>
+      <CartProvider>
+        <FavoritesProvider>
+          <NotificationsProvider>
+            <TooltipProvider>
+              <Toaster />
+              <Sonner />
+              <BrowserRouter>
+                <Routes>
+                  <Route path="/login" element={<LoginPage />} />
+                  <Route path="/" element={<Navigate to="/store" replace />} />
+                  
+                  <Route element={<ProtectedRoute />}>
+                    <Route path="/store" element={<StorePage />} />
+                    <Route path="/checkout" element={<CheckoutPage />} />
+                    <Route path="/confirmation" element={<ConfirmationPage />} />
+                    <Route path="/favorites" element={<FavoritesPage />} />
+                    <Route path="/purchase-history" element={<PurchaseHistoryPage />} />
+                  </Route>
+                  
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </BrowserRouter>
+            </TooltipProvider>
+          </NotificationsProvider>
+        </FavoritesProvider>
+      </CartProvider>
     </AuthProvider>
   </QueryClientProvider>
 );
