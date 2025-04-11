@@ -1,5 +1,5 @@
 
-import { ShoppingCart, LogOut, User } from "lucide-react";
+import { ShoppingCart, LogOut, User, Heart, Bell } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useCart } from "@/contexts/CartContext";
 import { Link } from "react-router-dom";
@@ -8,33 +8,61 @@ import {
   DropdownMenu, 
   DropdownMenuContent, 
   DropdownMenuItem, 
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
   DropdownMenuTrigger 
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 
 const Header = () => {
   const { isAuthenticated, logout, user } = useAuth();
-  const { totalItems } = useCart();
+  const { totalItems, totalPrice } = useCart();
   const [logoSrc, setLogoSrc] = useState("/lovable-uploads/ab795641-0b7b-4946-b1fc-cb5b0efe542d.png");
 
   if (!isAuthenticated) return null;
 
+  const formattedTotal = new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL'
+  }).format(totalPrice);
+
   return (
-    <header className="bg-white border-b border-gray-200 py-4 px-4 md:px-6 shadow-sm sticky top-0 z-10">
+    <header className="bg-white border-b border-gray-100 py-3 px-4 md:px-6 shadow-sm sticky top-0 z-10">
       <div className="container mx-auto flex items-center justify-between">
         <Link to="/store" className="flex items-center space-x-2">
-          <img 
-            src={logoSrc} 
-            alt="Logo" 
-            className="h-10 w-10" 
-            onError={() => setLogoSrc("/placeholder.svg")}
-          />
-          <span className="font-medium text-xl">Influencer Store</span>
+          <div className="relative">
+            <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-brand-magenta/20 to-brand-orange/20 blur-sm"></div>
+            <div className="relative">
+              <img 
+                src={logoSrc} 
+                alt="Logo" 
+                className="h-8 w-8 rounded-full" 
+                onError={() => setLogoSrc("/placeholder.svg")}
+              />
+            </div>
+          </div>
+          <span className="font-medium text-xl bg-gradient-to-r from-brand-magenta to-brand-orange bg-clip-text text-transparent hidden sm:inline-block">
+            Influencer Store
+          </span>
         </Link>
         
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-1 sm:space-x-3">
+          <Button variant="ghost" size="icon" className="text-gray-600" aria-label="Favoritos">
+            <Heart className="h-5 w-5" />
+          </Button>
+          
+          <Button variant="ghost" size="icon" className="text-gray-600" aria-label="Notificações">
+            <Bell className="h-5 w-5" />
+          </Button>
+          
           <Link to="/checkout" className="relative">
-            <Button variant="outline" size="icon" aria-label="Carrinho">
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              className={`relative ${totalItems > 0 ? 'text-brand-magenta' : 'text-gray-600'}`} 
+              aria-label="Carrinho"
+            >
               <ShoppingCart className="h-5 w-5" />
               {totalItems > 0 && (
                 <span className="absolute -top-2 -right-2 bg-brand-magenta text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
@@ -42,18 +70,28 @@ const Header = () => {
                 </span>
               )}
             </Button>
+            
+            {/* Cart price preview */}
+            {totalItems > 0 && (
+              <div className="hidden sm:block absolute top-full right-0 mt-1 bg-white rounded-md py-1 px-2 text-xs font-medium text-brand-magenta border border-gray-100 shadow-sm">
+                {formattedTotal}
+              </div>
+            )}
           </Link>
           
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="outline" size="icon">
-                <User className="h-5 w-5" />
+              <Button variant="ghost" size="icon" className="rounded-full bg-gray-50">
+                <User className="h-5 w-5 text-gray-700" />
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuItem className="text-sm font-medium">
+            <DropdownMenuContent align="end" className="w-56">
+              <DropdownMenuLabel>Minha Conta</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem className="text-sm">
                 {user?.email}
               </DropdownMenuItem>
+              <DropdownMenuSeparator />
               <DropdownMenuItem onClick={logout} className="text-red-500 cursor-pointer">
                 <LogOut className="mr-2 h-4 w-4" />
                 <span>Sair</span>

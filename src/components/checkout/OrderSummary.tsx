@@ -1,6 +1,7 @@
 
 import { useCart } from "@/contexts/CartContext";
-import { ShoppingBag, CreditCard, Tag } from "lucide-react";
+import { ShoppingBag, CreditCard, Tag, Truck, Calculator } from "lucide-react";
+import { Separator } from "@/components/ui/separator";
 
 interface OrderSummaryProps {
   className?: string;
@@ -17,10 +18,14 @@ const OrderSummary = ({ className }: OrderSummaryProps) => {
   const totalQuantity = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
-    <div className={`bg-white rounded-lg shadow-sm p-6 ${className || ''}`}>
-      <div className="flex items-center gap-2 mb-4 border-b pb-4">
-        <ShoppingBag className="text-brand-magenta" size={18} />
-        <h2 className="text-lg font-medium text-gray-900">Resumo do Pedido</h2>
+    <div className={`bg-white rounded-xl shadow-sm p-6 border border-gray-100 ${className || ''}`}>
+      <div className="flex items-center gap-2 mb-4">
+        <div className="h-8 w-8 rounded-full bg-brand-magenta/10 flex items-center justify-center">
+          <ShoppingBag size={16} className="text-brand-magenta" />
+        </div>
+        <h2 className="text-lg font-bold bg-gradient-to-r from-brand-magenta to-brand-orange bg-clip-text text-transparent">
+          Resumo do Pedido
+        </h2>
       </div>
       
       <div className="space-y-3">
@@ -33,40 +38,75 @@ const OrderSummary = ({ className }: OrderSummaryProps) => {
         </div>
         
         {cartItems.length > 0 && (
-          <div className="pt-3 space-y-3">
+          <div className="pt-3 space-y-3 max-h-40 overflow-y-auto pr-2 scrollbar-thin">
             {cartItems.map((item) => (
-              <div key={item.id} className="flex justify-between text-sm">
-                <div className="flex-1 truncate pr-4">
-                  <span className="text-gray-700 font-medium">
-                    {item.name} 
-                  </span>
-                  <span className="text-gray-500 ml-1">
-                    x {item.quantity}
+              <div key={item.id} className="flex justify-between text-sm pb-2 border-b border-dashed border-gray-100">
+                <div className="flex items-center gap-2">
+                  <div className="h-6 w-6 bg-gray-100 rounded-md overflow-hidden flex-shrink-0">
+                    <img
+                      src={item.image}
+                      alt=""
+                      className="h-full w-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).src = '/placeholder.svg';
+                      }}
+                    />
+                  </div>
+                  <span className="text-gray-700 font-medium truncate max-w-[120px]">
+                    {item.name}
                   </span>
                 </div>
-                <span className="text-gray-900">
-                  {new Intl.NumberFormat('pt-BR', {
-                    style: 'currency',
-                    currency: 'BRL'
-                  }).format(item.price * item.quantity)}
-                </span>
+                <div className="flex items-center gap-1 text-gray-900">
+                  <span className="text-xs text-gray-500">
+                    {item.quantity}x
+                  </span>
+                  <span>
+                    {new Intl.NumberFormat('pt-BR', {
+                      style: 'currency',
+                      currency: 'BRL'
+                    }).format(item.price)}
+                  </span>
+                </div>
               </div>
             ))}
           </div>
         )}
         
-        <div className="border-t border-gray-200 pt-4 mt-4">
+        <Separator className="my-3" />
+        
+        <div className="space-y-2">
+          <div className="flex justify-between items-center text-sm">
+            <div className="flex items-center gap-2">
+              <Calculator size={14} className="text-gray-400" />
+              <span className="text-gray-500">Subtotal:</span>
+            </div>
+            <span className="text-gray-700">{formattedTotal}</span>
+          </div>
+          
+          <div className="flex justify-between items-center text-sm">
+            <div className="flex items-center gap-2">
+              <Truck size={14} className="text-gray-400" />
+              <span className="text-gray-500">Entrega:</span>
+            </div>
+            <span className="text-green-500 font-medium">Grátis</span>
+          </div>
+        </div>
+        
+        <div className="mt-4 pt-4 border-t border-gray-100">
           <div className="flex justify-between items-center font-medium text-lg">
             <div className="flex items-center gap-2">
               <CreditCard size={18} className="text-brand-magenta" />
               <span>Total:</span>
             </div>
-            <span className="text-brand-magenta">{formattedTotal}</span>
+            <span className="text-brand-magenta font-bold">{formattedTotal}</span>
           </div>
           
-          <p className="text-xs text-gray-500 mt-2 text-center">
-            Pagamento seguro processado na entrega
-          </p>
+          <div className="mt-3 p-2 bg-gray-50 rounded-lg border border-gray-100">
+            <p className="text-xs text-center text-gray-500 flex items-center justify-center gap-1">
+              <CreditCard size={12} className="text-gray-400" />
+              Pagamento seguro processado na entrega
+            </p>
+          </div>
         </div>
       </div>
     </div>

@@ -5,7 +5,7 @@ import StoreLayout from "@/components/layouts/StoreLayout";
 import ProductGrid from "@/components/store/ProductGrid";
 import { Product } from "@/contexts/CartContext";
 import { Badge } from "@/components/ui/badge";
-import { ShoppingBag } from "lucide-react";
+import { ShoppingBag, Tag, Sparkles } from "lucide-react";
 
 // Sample product data
 const productData: Product[] = [
@@ -121,41 +121,57 @@ const StorePage = () => {
   return (
     <StoreLayout>
       <div className="mb-8">
-        <div className="flex items-center gap-2 mb-2">
-          <ShoppingBag className="text-brand-magenta" size={24} />
-          <h1 className="text-2xl font-bold text-gray-900">Nossa Loja</h1>
-        </div>
-        
-        <div className="flex items-center justify-between">
-          <p className="text-gray-500">
-            Encontre os produtos exclusivos selecionados para você
-          </p>
+        <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 mb-6">
+          <div className="flex items-center gap-3 mb-2">
+            <div className="h-10 w-10 rounded-full bg-brand-magenta/10 flex items-center justify-center">
+              <ShoppingBag size={20} className="text-brand-magenta" />
+            </div>
+            <div>
+              <h1 className="text-2xl font-bold bg-gradient-to-r from-brand-magenta to-brand-orange bg-clip-text text-transparent">
+                Nossa Loja
+              </h1>
+              <p className="text-gray-500 text-sm">
+                Encontre os produtos exclusivos selecionados para você
+              </p>
+            </div>
+          </div>
           
-          <Badge variant="outline" className="bg-white border-brand-magenta text-brand-magenta">
-            {getCategoryLabel(category)}
-          </Badge>
+          <div className="flex items-center justify-between mt-4 pt-4 border-t border-dashed border-gray-100">
+            <div className="flex items-center gap-2">
+              <Tag size={16} className="text-brand-magenta" />
+              <span className="text-sm font-medium text-gray-700">Categoria atual:</span>
+              <Badge className="bg-brand-magenta">
+                {getCategoryLabel(category)}
+              </Badge>
+            </div>
+            
+            <div className="flex items-center gap-1 text-xs text-gray-500">
+              <Sparkles size={14} className="text-brand-orange" />
+              <span className="hidden sm:inline-block">+1500 clientes satisfeitos</span>
+            </div>
+          </div>
         </div>
-      </div>
 
-      {isLoading ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {Array.from({ length: 8 }).map((_, index) => (
-            <div key={index} className="bg-white rounded-xl shadow-sm overflow-hidden animate-pulse">
-              <div className="h-48 bg-gray-200"></div>
-              <div className="p-4 space-y-3">
-                <div className="h-4 bg-gray-200 rounded"></div>
-                <div className="h-4 bg-gray-200 rounded w-2/3"></div>
-                <div className="flex justify-between items-center pt-2">
-                  <div className="h-6 bg-gray-200 rounded w-1/4"></div>
-                  <div className="h-8 bg-gray-200 rounded w-1/4"></div>
+        {isLoading ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {Array.from({ length: 8 }).map((_, index) => (
+              <div key={index} className="bg-white rounded-xl shadow-sm overflow-hidden animate-pulse">
+                <div className="h-48 bg-gray-200"></div>
+                <div className="p-4 space-y-3">
+                  <div className="h-4 bg-gray-200 rounded"></div>
+                  <div className="h-4 bg-gray-200 rounded w-2/3"></div>
+                  <div className="flex justify-between items-center pt-2">
+                    <div className="h-6 bg-gray-200 rounded w-1/4"></div>
+                    <div className="h-8 bg-gray-200 rounded w-1/4"></div>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
-      ) : (
-        <ProductGrid products={products} category={category} />
-      )}
+            ))}
+          </div>
+        ) : (
+          <ProductGrid products={products} category={category} />
+        )}
+      </div>
     </StoreLayout>
   );
 };

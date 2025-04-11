@@ -55,6 +55,11 @@
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
+  
+  /* Smooth scrolling for the entire site */
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 @layer components {
@@ -83,6 +88,25 @@
   
   .card-gradient-border > div {
     @apply bg-white rounded-[calc(0.75rem-2px)] overflow-hidden;
+  }
+  
+  /* Glass morphism effect */
+  .glass-effect {
+    @apply backdrop-blur-md bg-white/80 border border-white/50 shadow-sm;
+  }
+  
+  /* Modern gradient backgrounds */
+  .bg-gradient-brand {
+    @apply bg-gradient-to-br from-brand-magenta to-brand-orange;
+  }
+  
+  .bg-gradient-light {
+    @apply bg-gradient-to-br from-white to-gray-50;
+  }
+  
+  /* Transitions for product cards and UI elements */
+  .transition-smooth {
+    @apply transition-all duration-300 ease-in-out;
   }
 }
 
@@ -128,5 +152,42 @@
   @keyframes shimmerAnimation {
     0% { background-position: -200% 0; }
     100% { background-position: 200% 0; }
+  }
+  
+  /* Custom scrollbar for containers */
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(203, 213, 225, 0.5) transparent;
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: rgba(203, 213, 225, 0.5);
+    border-radius: 20px;
+  }
+  
+  /* Hover effects for buttons and interactive elements */
+  .hover-lift {
+    @apply transition-transform duration-200 hover:-translate-y-0.5;
+  }
+  
+  .hover-glow {
+    @apply transition-all duration-300;
+  }
+  .hover-glow:hover {
+    box-shadow: 0 0 15px rgba(233, 30, 99, 0.3);
+  }
+  
+  /* Gradient text styles */
+  .text-gradient-brand {
+    @apply bg-gradient-to-r from-brand-magenta to-brand-orange bg-clip-text text-transparent;
   }
 }

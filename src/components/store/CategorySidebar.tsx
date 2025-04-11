@@ -1,7 +1,8 @@
 
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { cn } from "@/lib/utils";
+import { Layers, Tag, ShoppingBag } from "lucide-react";
 
 // Sample product categories
 const categories = [
@@ -20,23 +21,32 @@ interface CategorySidebarProps {
 }
 
 const CategorySidebar = ({ className }: CategorySidebarProps) => {
+  const [searchParams] = useSearchParams();
   const [activeCategory, setActiveCategory] = useState("todos");
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const category = searchParams.get("category") || "todos";
+    setActiveCategory(category);
+  }, [searchParams]);
+
   const handleCategoryClick = (slug: string) => {
     setActiveCategory(slug);
-    // In a real app, this would filter products by category
-    // Here we're just updating the active state
     navigate(`/store?category=${slug}`);
   };
 
   return (
     <aside className={cn(
-      "h-full bg-white border-r border-gray-200 p-4 overflow-y-auto",
+      "h-full bg-white p-6 overflow-y-auto",
       className
     )}>
-      <div className="pb-4 mb-4 border-b border-gray-200">
-        <h2 className="text-xl font-bold text-gray-900">Categorias</h2>
+      <div className="flex items-center gap-2 mb-6">
+        <div className="h-10 w-10 rounded-full bg-brand-magenta/10 flex items-center justify-center">
+          <ShoppingBag size={20} className="text-brand-magenta" />
+        </div>
+        <h2 className="text-xl font-bold bg-gradient-to-r from-brand-magenta to-brand-orange bg-clip-text text-transparent">
+          Categorias
+        </h2>
       </div>
       
       <nav className="space-y-1">
@@ -45,16 +55,32 @@ const CategorySidebar = ({ className }: CategorySidebarProps) => {
             key={category.id}
             onClick={() => handleCategoryClick(category.slug)}
             className={cn(
-              "w-full text-left px-3 py-2 rounded-lg transition-colors flex items-center",
+              "w-full text-left px-4 py-3 rounded-lg transition-all flex items-center gap-3 group",
               activeCategory === category.slug
-                ? "bg-brand-magenta/10 text-brand-magenta font-medium"
-                : "text-gray-700 hover:bg-gray-100"
+                ? "bg-brand-magenta/10 text-brand-magenta font-medium shadow-sm"
+                : "text-gray-600 hover:bg-gray-50"
             )}
           >
-            {category.name}
+            {activeCategory === category.slug ? (
+              <Tag size={16} className="text-brand-magenta" />
+            ) : (
+              <Layers size={16} className="text-gray-400 group-hover:text-gray-600 transition-colors" />
+            )}
+            <span className={cn(
+              "transition-all",
+              activeCategory === category.slug && "translate-x-1"
+            )}>
+              {category.name}
+            </span>
           </button>
         ))}
       </nav>
+      
+      {/* Decorative element */}
+      <div className="mt-10 rounded-lg bg-gradient-to-br from-brand-magenta/5 to-brand-orange/5 p-4 border border-gray-100">
+        <p className="text-sm text-gray-500 mb-2">Nossa seleção exclusiva</p>
+        <p className="text-xs text-gray-400">Produtos selecionados especialmente para você.</p>
+      </div>
     </aside>
   );
 };
