@@ -20,7 +20,7 @@ const StoreLayout: React.FC<StoreLayoutProps> = ({ children }) => {
     <div className={cn(
       "min-h-screen flex flex-col",
       theme === "dark" 
-        ? "bg-background text-foreground" 
+        ? "bg-gradient-to-br from-gray-900 to-gray-800" 
         : "bg-gradient-to-br from-white to-gray-50"
     )}>
       <Header />
@@ -40,7 +40,7 @@ const StoreLayout: React.FC<StoreLayoutProps> = ({ children }) => {
           lg:w-64 lg:flex-shrink-0 transition-all duration-300
           fixed lg:relative z-40 h-full 
           ${theme === "dark" 
-            ? "bg-sidebar-background border-r border-sidebar-border text-sidebar-foreground" 
+            ? "bg-gray-800 border-r border-gray-700 shadow-sm" 
             : "bg-white border-r border-gray-100 shadow-sm"}
           ${sidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}
         `}>

@@ -40,7 +40,7 @@ const CategorySidebar = ({ className }: CategorySidebarProps) => {
   return (
     <aside className={cn(
       "h-full p-6 overflow-y-auto",
-      theme === "dark" ? "bg-sidebar-background text-sidebar-foreground" : "bg-white text-gray-800",
+      theme === "dark" ? "bg-gray-800 text-gray-100" : "bg-white text-gray-800",
       className
     )}>
       <div className="flex items-center gap-2 mb-6">
@@ -62,7 +62,7 @@ const CategorySidebar = ({ className }: CategorySidebarProps) => {
               activeCategory === category.slug
                 ? "bg-brand-magenta/10 text-brand-magenta font-medium shadow-sm"
                 : theme === "dark" 
-                  ? "text-gray-300 hover:bg-sidebar-accent" 
+                  ? "text-gray-300 hover:bg-gray-700" 
                   : "text-gray-600 hover:bg-gray-50"
             )}
           >
@@ -93,12 +93,12 @@ const CategorySidebar = ({ className }: CategorySidebarProps) => {
       <div className={cn(
         "mt-10 rounded-lg p-4 border",
         theme === "dark" 
-          ? "bg-gradient-to-br from-brand-magenta/5 to-brand-orange/5 border-sidebar-border" 
+          ? "bg-gradient-to-br from-brand-magenta/5 to-brand-orange/5 border-gray-700" 
           : "bg-gradient-to-br from-brand-magenta/5 to-brand-orange/5 border-gray-100"
       )}>
         <p className={cn(
           "text-sm mb-2",
-          theme === "dark" ? "text-muted-foreground" : "text-gray-500"
+          theme === "dark" ? "text-gray-400" : "text-gray-500"
         )}>
           Nossa seleção exclusiva
         </p>

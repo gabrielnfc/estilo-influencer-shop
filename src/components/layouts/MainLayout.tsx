@@ -15,7 +15,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children, className }) => {
   return (
     <div className={cn(
       "min-h-screen flex flex-col",
-      theme === "dark" ? "bg-background text-foreground" : "bg-gray-50 text-gray-900"
+      theme === "dark" ? "bg-gray-900 text-gray-100" : "bg-gray-50 text-gray-900"
     )}>
       <Header />
       <main className={cn("flex-1 px-4 pb-6 md:px-6", className)}>

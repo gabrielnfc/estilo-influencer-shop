@@ -12,7 +12,7 @@ const LoginDecorative = () => {
     <div className={cn(
       "hidden md:flex md:w-1/2 p-8 justify-center items-center relative overflow-hidden",
       theme === "dark" 
-        ? "bg-gradient-to-br from-background to-sidebar-background" 
+        ? "bg-gradient-to-br from-gray-900 to-gray-800" 
         : "bg-gradient-to-br from-white to-gray-100"
     )}>
       {/* Background patterns - subtle animation */}
@@ -53,7 +53,7 @@ const LoginDecorative = () => {
         
         <h1 className={cn(
           "text-4xl font-bold mb-4",
-          theme === "dark" ? "text-foreground" : "text-gray-800"
+          theme === "dark" ? "text-gray-100" : "text-gray-800"
         )}>
           Bem-vindo(a) à sua<br />
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-brand-magenta to-brand-orange animate-text">
@@ -63,7 +63,7 @@ const LoginDecorative = () => {
         
         <p className={cn(
           "text-lg leading-relaxed",
-          theme === "dark" ? "text-muted-foreground" : "text-gray-600"
+          theme === "dark" ? "text-gray-300" : "text-gray-600"
         )}>
           Faça login para acessar uma experiência personalizada
           com produtos exclusivos selecionados especialmente para você.
@@ -117,7 +117,7 @@ const FeatureItem = ({ icon, text, bgClass, theme }: FeatureItemProps) => (
     <div className={`h-10 w-10 rounded-full ${bgClass} flex items-center justify-center`}>
       {icon}
     </div>
-    <span className={theme === "dark" ? "text-muted-foreground" : "text-gray-700"}>{text}</span>
+    <span className={theme === "dark" ? "text-gray-300" : "text-gray-700"}>{text}</span>
   </div>
 );
 

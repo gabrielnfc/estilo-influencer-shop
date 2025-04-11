@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -45,13 +46,13 @@
   }
 
   .dark {
-    --background: 348 30% 10%;
+    --background: 240 10% 3.9%;
     --foreground: 0 0% 98%;
 
-    --card: 348 25% 15%;
+    --card: 240 10% 3.9%;
     --card-foreground: 0 0% 98%;
 
-    --popover: 348 25% 15%;
+    --popover: 240 10% 3.9%;
     --popover-foreground: 0 0% 98%;
 
     --primary: 348 83% 47%;
@@ -60,26 +61,26 @@
     --secondary: 14 100% 57%;
     --secondary-foreground: 0 0% 98%;
 
-    --muted: 348 20% 20%;
-    --muted-foreground: 240 5% 84.9%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
 
-    --accent: 348 20% 20%;
+    --accent: 240 3.7% 15.9%;
     --accent-foreground: 0 0% 98%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 348 20% 20%;
-    --input: 348 20% 20%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
     --ring: 348 83% 47%;
 
-    --sidebar-background: 348 30% 15%;
+    --sidebar-background: 240 10% 3.9%;
     --sidebar-foreground: 0 0% 98%;
     --sidebar-primary: 348 83% 47%;
     --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 348 20% 20%;
+    --sidebar-accent: 240 3.7% 15.9%;
     --sidebar-accent-foreground: 0 0% 98%;
-    --sidebar-border: 348 20% 20%;
+    --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 348 83% 47%;
   }
 }
@@ -94,6 +95,7 @@
     font-feature-settings: "rlig" 1, "calt" 1;
   }
   
+  /* Smooth scrolling for the entire site */
   html {
     scroll-behavior: smooth;
   }
@@ -112,10 +114,12 @@
     @apply bg-brand-orange text-white hover:bg-brand-orange/90 rounded-md px-4 py-2 font-medium transition-colors;
   }
   
+  /* Social hover effects */
   .social-icon-hover {
     @apply transition-transform hover:scale-110 hover:rotate-3;
   }
   
+  /* Card with gradient border */
   .card-gradient-border {
     @apply relative rounded-lg p-0.5 overflow-hidden;
     background: linear-gradient(to right, #E91E63, #FF5722);
@@ -125,10 +129,12 @@
     @apply bg-white dark:bg-gray-800 rounded-[calc(0.75rem-2px)] overflow-hidden;
   }
   
+  /* Glass morphism effect */
   .glass-effect {
     @apply backdrop-blur-md bg-white/80 dark:bg-gray-800/80 border border-white/50 dark:border-white/10 shadow-sm;
   }
   
+  /* Modern gradient backgrounds */
   .bg-gradient-brand {
     @apply bg-gradient-to-br from-brand-magenta to-brand-orange;
   }
@@ -137,6 +143,7 @@
     @apply bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900;
   }
   
+  /* Transitions for product cards and UI elements */
   .transition-smooth {
     @apply transition-all duration-300 ease-in-out;
   }
@@ -148,7 +155,7 @@
   }
   
   .bg-grid-dark {
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(233 30 99 / 0.15)'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e");
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(255 255 255 / 0.1)'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e");
   }
   
   .animate-text {
@@ -199,6 +206,7 @@
     100% { background-position: 200% 0; }
   }
   
+  /* Custom scrollbar for containers */
   .scrollbar-thin {
     scrollbar-width: thin;
     scrollbar-color: rgba(203, 213, 225, 0.5) transparent;
@@ -226,6 +234,7 @@
     background-color: rgba(75, 85, 99, 0.5);
   }
   
+  /* Hover effects for buttons and interactive elements */
   .hover-lift {
     @apply transition-transform duration-200 hover:-translate-y-0.5;
   }
@@ -237,6 +246,7 @@
     box-shadow: 0 0 15px rgba(233, 30, 99, 0.3);
   }
   
+  /* Gradient text styles */
   .text-gradient-brand {
     @apply bg-gradient-to-r from-brand-magenta to-brand-orange bg-clip-text text-transparent;
   }

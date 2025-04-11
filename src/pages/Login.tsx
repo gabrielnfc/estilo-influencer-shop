@@ -20,7 +20,7 @@ const LoginPage = () => {
   return (
     <div className={cn(
       "min-h-screen w-full flex flex-col md:flex-row",
-      theme === "dark" ? "bg-background text-foreground" : "bg-white"
+      theme === "dark" ? "bg-gray-900" : "bg-white"
     )}>
       {/* Left decorative section - only visible on md screens and above */}
       <LoginDecorative />
@@ -28,7 +28,7 @@ const LoginPage = () => {
       {/* Login form section */}
       <div className={cn(
         "w-full md:w-1/2 flex items-center justify-center p-6 md:p-12",
-        theme === "dark" ? "bg-background" : "bg-white"
+        theme === "dark" ? "bg-gray-900" : "bg-white"
       )}>
         <div className="w-full max-w-md">
           {/* Logo - only visible on mobile */}
@@ -40,7 +40,7 @@ const LoginPage = () => {
           
           <p className={cn(
             "text-center text-sm mt-6",
-            theme === "dark" ? "text-muted-foreground" : "text-gray-500"
+            theme === "dark" ? "text-gray-400" : "text-gray-500"
           )}>
             Esta é uma loja privada apenas para convidados
           </p>
