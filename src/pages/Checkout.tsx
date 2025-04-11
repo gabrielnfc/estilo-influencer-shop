@@ -213,16 +213,6 @@ const CheckoutPage = () => {
                       />
                     </div>
                   </div>
-                  
-                  <div className="pt-4 lg:hidden">
-                    <Button 
-                      type="submit"
-                      className="w-full bg-brand-magenta hover:bg-brand-magenta/90 py-6"
-                      disabled={isSubmitting}
-                    >
-                      {isSubmitting ? "Processando..." : "Confirmar Pedido"}
-                    </Button>
-                  </div>
                 </form>
               </CardContent>
             </Card>
@@ -456,13 +446,14 @@ const CheckoutPage = () => {
           </div>
 
           <div>
-            <OrderSummary className="sticky top-24" />
-            
-            <div className="mt-6 hidden lg:block">
+            <div className="sticky top-24 space-y-6">
+              <OrderSummary />
+              
               <Button 
                 onClick={handleSubmit}
                 className="w-full bg-brand-magenta hover:bg-brand-magenta/90 py-6 h-auto text-base font-medium"
                 disabled={isSubmitting}
+                form="checkoutForm"
               >
                 {isSubmitting ? "Processando..." : "Confirmar Pedido"}
               </Button>
