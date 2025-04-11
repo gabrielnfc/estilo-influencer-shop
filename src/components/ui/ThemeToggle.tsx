@@ -3,6 +3,7 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/contexts/ThemeContext";
 import { Moon, Sun } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 const ThemeToggle: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
@@ -12,7 +13,10 @@ const ThemeToggle: React.FC = () => {
       variant="ghost" 
       size="icon" 
       onClick={toggleTheme} 
-      className="rounded-full transition-transform hover:scale-110"
+      className={cn(
+        "rounded-full transition-transform hover:scale-110",
+        theme === "dark" ? "hover:bg-muted" : ""
+      )}
       aria-label={theme === "light" ? "Switch to dark mode" : "Switch to light mode"}
     >
       {theme === "light" ? (

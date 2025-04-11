@@ -20,7 +20,7 @@ const LoginPage = () => {
   return (
     <div className={cn(
       "min-h-screen w-full flex flex-col md:flex-row",
-      theme === "dark" ? "bg-gray-900" : "bg-white"
+      theme === "dark" ? "bg-background" : "bg-white"
     )}>
       {/* Left decorative section - only visible on md screens and above */}
       <LoginDecorative />
@@ -28,7 +28,7 @@ const LoginPage = () => {
       {/* Login form section */}
       <div className={cn(
         "w-full md:w-1/2 flex items-center justify-center p-6 md:p-12",
-        theme === "dark" ? "bg-gray-900" : "bg-white"
+        theme === "dark" ? "bg-background" : "bg-white"
       )}>
         <div className="w-full max-w-md">
           {/* Logo - only visible on mobile */}
