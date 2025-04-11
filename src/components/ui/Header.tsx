@@ -102,19 +102,19 @@ const Header = () => {
                 <User className="h-5 w-5 text-gray-700 dark:text-gray-300" />
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-56 bg-white dark:bg-gray-900 border-gray-100 dark:border-gray-800">
-              <DropdownMenuLabel className="text-gray-700 dark:text-gray-300">Área do Cliente</DropdownMenuLabel>
-              <DropdownMenuSeparator className="bg-gray-100 dark:bg-gray-800" />
-              <DropdownMenuItem className="text-sm text-gray-600 dark:text-gray-400">
+            <DropdownMenuContent align="end" className="w-56">
+              <DropdownMenuLabel>Área do Cliente</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem className="text-sm">
                 {user?.email}
               </DropdownMenuItem>
-              <DropdownMenuItem asChild className="flex items-center cursor-pointer text-gray-700 dark:text-gray-300">
+              <DropdownMenuItem asChild className="flex items-center cursor-pointer">
                 <Link to="/purchase-history">
                   <History className="mr-2 h-4 w-4" />
                   <span>Histórico de Compras</span>
                 </Link>
               </DropdownMenuItem>
-              <DropdownMenuSeparator className="bg-gray-100 dark:bg-gray-800" />
+              <DropdownMenuSeparator />
               <DropdownMenuItem onClick={logout} className="text-red-500 cursor-pointer">
                 <LogOut className="mr-2 h-4 w-4" />
                 <span>Sair</span>
