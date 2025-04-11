@@ -13,8 +13,6 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { Checkbox } from "@/components/ui/checkbox";
-import { useTheme } from "@/contexts/ThemeContext";
-import { cn } from "@/lib/utils";
 
 const CheckoutPage = () => {
   const { cartItems, totalItems, clearCart } = useCart();
@@ -34,7 +32,6 @@ const CheckoutPage = () => {
   const [zipCodeError, setZipCodeError] = useState("");
   const navigate = useNavigate();
   const { toast } = useToast();
-  const { theme } = useTheme();
 
   const validateZipCode = (value: string) => {
     const numericZipCode = value.replace(/\D/g, '');
@@ -107,29 +104,12 @@ const CheckoutPage = () => {
     return (
       <MainLayout>
         <div className="max-w-4xl mx-auto py-12">
-          <div className={cn(
-            "text-center py-16 rounded-xl shadow-sm",
-            theme === "dark" ? "bg-card" : "bg-white"
-          )}>
-            <div className={cn(
-              "inline-flex items-center justify-center h-20 w-20 rounded-full mb-6",
-              theme === "dark" ? "bg-muted" : "bg-gray-100"
-            )}>
-              <ShoppingBag className={cn(
-                "h-10 w-10",
-                theme === "dark" ? "text-muted-foreground" : "text-gray-400"
-              )} />
+          <div className="text-center py-16 bg-white rounded-xl shadow-sm">
+            <div className="inline-flex items-center justify-center h-20 w-20 rounded-full bg-gray-100 mb-6">
+              <ShoppingBag className="h-10 w-10 text-gray-400" />
             </div>
-            <h2 className={cn(
-              "mt-4 text-2xl font-medium",
-              theme === "dark" ? "text-foreground" : "text-gray-900"
-            )}>
-              Seu carrinho está vazio
-            </h2>
-            <p className={cn(
-              "mt-2",
-              theme === "dark" ? "text-muted-foreground" : "text-gray-500"
-            )}>
+            <h2 className="mt-4 text-2xl font-medium text-gray-900">Seu carrinho está vazio</h2>
+            <p className="mt-2 text-gray-500">
               Parece que você ainda não adicionou nenhum produto ao seu pedido.
             </p>
             <Button
@@ -149,19 +129,13 @@ const CheckoutPage = () => {
       <div className="max-w-6xl mx-auto py-8">
         <button
           onClick={() => navigate(-1)}
-          className={cn(
-            "flex items-center mb-6 group",
-            theme === "dark" ? "text-muted-foreground hover:text-foreground" : "text-gray-600 hover:text-gray-900"
-          )}
+          className="flex items-center text-gray-600 hover:text-gray-900 mb-6 group"
         >
           <ArrowLeft className="mr-2 h-4 w-4 group-hover:-translate-x-1 transition-transform" />
           Voltar
         </button>
 
-        <h1 className={cn(
-          "text-2xl font-bold mb-8 flex items-center gap-2",
-          theme === "dark" ? "text-foreground" : "text-gray-900"
-        )}>
+        <h1 className="text-2xl font-bold text-gray-900 mb-8 flex items-center gap-2">
           <ShoppingBag className="text-brand-magenta" size={24} />
           Finalizar Pedido
         </h1>
@@ -170,19 +144,11 @@ const CheckoutPage = () => {
           <div className="lg:col-span-2">
             <Card className="mb-6">
               <CardHeader className="pb-3">
-                <CardTitle className={cn(
-                  "text-lg font-medium",
-                  theme === "dark" ? "text-foreground" : "text-gray-900"
-                )}>
-                  Itens do Pedido
-                </CardTitle>
+                <CardTitle className="text-lg font-medium text-gray-900">Itens do Pedido</CardTitle>
               </CardHeader>
               <CardContent>
                 {cartItems.length > 0 ? (
-                  <div className={cn(
-                    "divide-y",
-                    theme === "dark" ? "divide-border" : "divide-gray-100"
-                  )}>
+                  <div className="divide-y divide-gray-100">
                     {cartItems.map((item) => (
                       <CartItem 
                         key={item.id}
@@ -195,19 +161,14 @@ const CheckoutPage = () => {
                     ))}
                   </div>
                 ) : (
-                  <p className={theme === "dark" ? "text-muted-foreground" : "text-gray-500"}>
-                    Nenhum item no pedido.
-                  </p>
+                  <p className="text-gray-500">Nenhum item no pedido.</p>
                 )}
               </CardContent>
             </Card>
 
             <Card className="mb-6">
               <CardHeader className="pb-3">
-                <CardTitle className={cn(
-                  "text-lg font-medium flex items-center gap-2",
-                  theme === "dark" ? "text-foreground" : "text-gray-900"
-                )}>
+                <CardTitle className="text-lg font-medium text-gray-900 flex items-center gap-2">
                   <User size={18} className="text-brand-magenta" />
                   Seus Dados
                 </CardTitle>
@@ -217,10 +178,7 @@ const CheckoutPage = () => {
                   <div>
                     <Label 
                       htmlFor="name" 
-                      className={cn(
-                        "font-medium flex items-center gap-2",
-                        theme === "dark" ? "text-foreground" : "text-gray-700"
-                      )}
+                      className="font-medium text-gray-700 flex items-center gap-2"
                     >
                       Nome Completo
                     </Label>
@@ -231,10 +189,7 @@ const CheckoutPage = () => {
                         onChange={e => setName(e.target.value)}
                         placeholder="Seu nome completo"
                         required
-                        className={cn(
-                          "pl-3 pr-3 py-2 h-11 rounded-lg border transition-all focus-visible:ring-brand-magenta",
-                          theme === "dark" ? "border-input" : "border-gray-200"
-                        )}
+                        className="pl-3 pr-3 py-2 h-11 rounded-lg border border-gray-200 focus-visible:ring-brand-magenta transition-all"
                       />
                     </div>
                   </div>
@@ -242,10 +197,7 @@ const CheckoutPage = () => {
                   <div>
                     <Label 
                       htmlFor="phone" 
-                      className={cn(
-                        "font-medium flex items-center gap-2",
-                        theme === "dark" ? "text-foreground" : "text-gray-700"
-                      )}
+                      className="font-medium text-gray-700 flex items-center gap-2"
                     >
                       <Phone size={16} className="text-brand-magenta" />
                       Telefone
@@ -257,10 +209,7 @@ const CheckoutPage = () => {
                         onChange={e => setPhone(e.target.value)}
                         placeholder="(00) 00000-0000"
                         required
-                        className={cn(
-                          "pl-3 pr-3 py-2 h-11 rounded-lg border transition-all focus-visible:ring-brand-magenta",
-                          theme === "dark" ? "border-input" : "border-gray-200"
-                        )}
+                        className="pl-3 pr-3 py-2 h-11 rounded-lg border border-gray-200 focus-visible:ring-brand-magenta transition-all"
                       />
                     </div>
                   </div>
@@ -270,10 +219,7 @@ const CheckoutPage = () => {
 
             <Card className="mb-6">
               <CardHeader className="pb-3">
-                <CardTitle className={cn(
-                  "text-lg font-medium flex items-center gap-2",
-                  theme === "dark" ? "text-foreground" : "text-gray-900"
-                )}>
+                <CardTitle className="text-lg font-medium text-gray-900 flex items-center gap-2">
                   <MapPin size={18} className="text-brand-magenta" />
                   Informações de Entrega
                 </CardTitle>
@@ -283,10 +229,7 @@ const CheckoutPage = () => {
                   <div>
                     <Label 
                       htmlFor="zipCode" 
-                      className={cn(
-                        "font-medium text-gray-700 flex items-center gap-2",
-                        theme === "dark" ? "text-foreground" : ""
-                      )}
+                      className="font-medium text-gray-700 flex items-center gap-2"
                     >
                       <MapPin size={14} className="text-gray-500" />
                       CEP
@@ -297,10 +240,7 @@ const CheckoutPage = () => {
                         value={zipCode}
                         onChange={handleZipCodeChange}
                         placeholder="00000-000"
-                        className={cn(
-                          "pl-3 pr-3 py-2 h-11 rounded-lg border transition-all focus-visible:ring-brand-magenta",
-                          theme === "dark" ? "border-input" : "border-gray-200"
-                        )}
+                        className="pl-3 pr-3 py-2 h-11 rounded-lg border border-gray-200 focus-visible:ring-brand-magenta transition-all"
                         maxLength={9}
                       />
                       {zipCodeError && (
@@ -312,10 +252,7 @@ const CheckoutPage = () => {
                   <div>
                     <Label 
                       htmlFor="country" 
-                      className={cn(
-                        "font-medium text-gray-700 flex items-center gap-2",
-                        theme === "dark" ? "text-foreground" : ""
-                      )}
+                      className="font-medium text-gray-700 flex items-center gap-2"
                     >
                       <Globe size={14} className="text-gray-500" />
                       País
@@ -326,10 +263,7 @@ const CheckoutPage = () => {
                         value={country}
                         onChange={e => setCountry(e.target.value)}
                         placeholder="País"
-                        className={cn(
-                          "pl-3 pr-3 py-2 h-11 rounded-lg border transition-all focus-visible:ring-brand-magenta",
-                          theme === "dark" ? "border-input" : "border-gray-200"
-                        )}
+                        className="pl-3 pr-3 py-2 h-11 rounded-lg border border-gray-200 focus-visible:ring-brand-magenta transition-all"
                       />
                     </div>
                   </div>
@@ -337,10 +271,7 @@ const CheckoutPage = () => {
                   <div className="md:col-span-2">
                     <Label 
                       htmlFor="street" 
-                      className={cn(
-                        "font-medium text-gray-700 flex items-center gap-2",
-                        theme === "dark" ? "text-foreground" : ""
-                      )}
+                      className="font-medium text-gray-700 flex items-center gap-2"
                     >
                       <Home size={14} className="text-gray-500" />
                       Av/Rua
@@ -351,10 +282,7 @@ const CheckoutPage = () => {
                         value={street}
                         onChange={e => setStreet(e.target.value)}
                         placeholder="Nome da rua ou avenida"
-                        className={cn(
-                          "pl-3 pr-3 py-2 h-11 rounded-lg border transition-all focus-visible:ring-brand-magenta",
-                          theme === "dark" ? "border-input" : "border-gray-200"
-                        )}
+                        className="pl-3 pr-3 py-2 h-11 rounded-lg border border-gray-200 focus-visible:ring-brand-magenta transition-all"
                       />
                     </div>
                   </div>
@@ -362,10 +290,7 @@ const CheckoutPage = () => {
                   <div>
                     <Label 
                       htmlFor="number" 
-                      className={cn(
-                        "font-medium",
-                        theme === "dark" ? "text-foreground" : "text-gray-700"
-                      )}
+                      className="font-medium text-gray-700"
                     >
                       Número
                     </Label>
@@ -375,10 +300,7 @@ const CheckoutPage = () => {
                         value={number}
                         onChange={e => setNumber(e.target.value)}
                         placeholder="Número"
-                        className={cn(
-                          "pl-3 pr-3 py-2 h-11 rounded-lg border transition-all focus-visible:ring-brand-magenta",
-                          theme === "dark" ? "border-input" : "border-gray-200"
-                        )}
+                        className="pl-3 pr-3 py-2 h-11 rounded-lg border border-gray-200 focus-visible:ring-brand-magenta transition-all"
                       />
                     </div>
                   </div>
@@ -386,10 +308,7 @@ const CheckoutPage = () => {
                   <div>
                     <Label 
                       htmlFor="complement" 
-                      className={cn(
-                        "font-medium",
-                        theme === "dark" ? "text-foreground" : "text-gray-700"
-                      )}
+                      className="font-medium text-gray-700"
                     >
                       Complemento
                     </Label>
@@ -399,10 +318,7 @@ const CheckoutPage = () => {
                         value={complement}
                         onChange={e => setComplement(e.target.value)}
                         placeholder="Casa, Apto, Bloco"
-                        className={cn(
-                          "pl-3 pr-3 py-2 h-11 rounded-lg border transition-all focus-visible:ring-brand-magenta",
-                          theme === "dark" ? "border-input" : "border-gray-200"
-                        )}
+                        className="pl-3 pr-3 py-2 h-11 rounded-lg border border-gray-200 focus-visible:ring-brand-magenta transition-all"
                       />
                     </div>
                   </div>
@@ -410,10 +326,7 @@ const CheckoutPage = () => {
                   <div>
                     <Label 
                       htmlFor="neighborhood" 
-                      className={cn(
-                        "font-medium text-gray-700 flex items-center gap-2",
-                        theme === "dark" ? "text-foreground" : ""
-                      )}
+                      className="font-medium text-gray-700 flex items-center gap-2"
                     >
                       <Building size={14} className="text-gray-500" />
                       Bairro
@@ -424,10 +337,7 @@ const CheckoutPage = () => {
                         value={neighborhood}
                         onChange={e => setNeighborhood(e.target.value)}
                         placeholder="Bairro"
-                        className={cn(
-                          "pl-3 pr-3 py-2 h-11 rounded-lg border transition-all focus-visible:ring-brand-magenta",
-                          theme === "dark" ? "border-input" : "border-gray-200"
-                        )}
+                        className="pl-3 pr-3 py-2 h-11 rounded-lg border border-gray-200 focus-visible:ring-brand-magenta transition-all"
                       />
                     </div>
                   </div>
@@ -435,10 +345,7 @@ const CheckoutPage = () => {
                   <div>
                     <Label 
                       htmlFor="city" 
-                      className={cn(
-                        "font-medium text-gray-700 flex items-center gap-2",
-                        theme === "dark" ? "text-foreground" : ""
-                      )}
+                      className="font-medium text-gray-700 flex items-center gap-2"
                     >
                       <Landmark size={14} className="text-gray-500" />
                       Cidade
@@ -449,10 +356,7 @@ const CheckoutPage = () => {
                         value={city}
                         onChange={e => setCity(e.target.value)}
                         placeholder="Cidade"
-                        className={cn(
-                          "pl-3 pr-3 py-2 h-11 rounded-lg border transition-all focus-visible:ring-brand-magenta",
-                          theme === "dark" ? "border-input" : "border-gray-200"
-                        )}
+                        className="pl-3 pr-3 py-2 h-11 rounded-lg border border-gray-200 focus-visible:ring-brand-magenta transition-all"
                       />
                     </div>
                   </div>
@@ -460,10 +364,7 @@ const CheckoutPage = () => {
                   <div>
                     <Label 
                       htmlFor="state" 
-                      className={cn(
-                        "font-medium text-gray-700 flex items-center gap-2",
-                        theme === "dark" ? "text-foreground" : ""
-                      )}
+                      className="font-medium text-gray-700 flex items-center gap-2"
                     >
                       <Flag size={14} className="text-gray-500" />
                       Estado
@@ -474,21 +375,13 @@ const CheckoutPage = () => {
                         value={state}
                         onChange={e => setState(e.target.value)}
                         placeholder="Estado"
-                        className={cn(
-                          "pl-3 pr-3 py-2 h-11 rounded-lg border transition-all focus-visible:ring-brand-magenta",
-                          theme === "dark" ? "border-input" : "border-gray-200"
-                        )}
+                        className="pl-3 pr-3 py-2 h-11 rounded-lg border border-gray-200 focus-visible:ring-brand-magenta transition-all"
                       />
                     </div>
                   </div>
                 </div>
 
-                <div className={cn(
-                  "mt-6 flex items-start gap-2 p-3 rounded-md border",
-                  theme === "dark" 
-                    ? "bg-amber-950/20 border-amber-800/30 text-amber-300" 
-                    : "bg-amber-50 border-amber-200 text-amber-800"
-                )}>
+                <div className="mt-6 flex items-start gap-2 p-3 bg-amber-50 border border-amber-200 rounded-md text-amber-800">
                   <AlertCircle className="h-5 w-5 flex-shrink-0 mt-0.5" />
                   <p className="text-sm">
                     Os itens selecionados estão sujeitos à confirmação de estoque e serão reservados em um momento posterior à conclusão da compra.
@@ -499,10 +392,7 @@ const CheckoutPage = () => {
 
             <Card>
               <CardHeader className="pb-3">
-                <CardTitle className={cn(
-                  "text-lg font-medium flex items-center gap-2",
-                  theme === "dark" ? "text-foreground" : "text-gray-900"
-                )}>
+                <CardTitle className="text-lg font-medium text-gray-900 flex items-center gap-2">
                   <FileText size={18} className="text-brand-magenta" />
                   Observações
                 </CardTitle>
@@ -520,13 +410,7 @@ const CheckoutPage = () => {
                         checked={showObservations}
                         onCheckedChange={() => setShowObservations(!showObservations)}
                       />
-                      <Label 
-                        htmlFor="hasObservations" 
-                        className={cn(
-                          "text-sm font-medium cursor-pointer",
-                          theme === "dark" ? "text-foreground" : ""
-                        )}
-                      >
+                      <Label htmlFor="hasObservations" className="text-sm font-medium cursor-pointer">
                         Deseja adicionar observações ao seu pedido?
                       </Label>
                     </div>
@@ -544,10 +428,7 @@ const CheckoutPage = () => {
                   <CollapsibleContent className="space-y-2">
                     <Label 
                       htmlFor="observations" 
-                      className={cn(
-                        "font-medium",
-                        theme === "dark" ? "text-foreground" : "text-gray-700"
-                      )}
+                      className="font-medium text-gray-700"
                     >
                       Informações adicionais para seu pedido
                     </Label>
@@ -556,10 +437,7 @@ const CheckoutPage = () => {
                       value={observations}
                       onChange={e => setObservations(e.target.value)}
                       placeholder="Informações adicionais para entrega ou sobre os produtos"
-                      className={cn(
-                        "min-h-[80px] transition-all resize-none focus-visible:ring-brand-magenta",
-                        theme === "dark" ? "border-input" : "border-gray-200"
-                      )}
+                      className="min-h-[80px] border-gray-200 focus-visible:ring-brand-magenta transition-all resize-none"
                     />
                   </CollapsibleContent>
                 </Collapsible>
@@ -580,18 +458,13 @@ const CheckoutPage = () => {
                 {isSubmitting ? "Processando..." : "Confirmar Pedido"}
               </Button>
               
-              <div className={cn(
-                "flex items-center justify-center text-sm mt-4",
-                theme === "dark" ? "text-muted-foreground" : "text-gray-500"
-              )}>
+              <div className="flex items-center justify-center text-gray-500 text-sm mt-4">
                 <span className="flex items-center">
                   <span className="inline-flex -space-x-2 overflow-hidden">
                     {[1, 2, 3].map((i) => (
                       <div 
                         key={i}
-                        className={`inline-block h-6 w-6 rounded-full ring-2 ${
-                          theme === "dark" ? "ring-background" : "ring-white"
-                        } ${
+                        className={`inline-block h-6 w-6 rounded-full ring-2 ring-white ${
                           i % 3 === 0 ? 'bg-brand-magenta/20' : 
                           i % 3 === 1 ? 'bg-brand-orange/20' : 'bg-purple-200'
                         }`}

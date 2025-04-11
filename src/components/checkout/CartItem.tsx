@@ -2,8 +2,6 @@
 import { Minus, Plus, X, Trash2 } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
 import { Badge } from "@/components/ui/badge";
-import { cn } from "@/lib/utils";
-import { useTheme } from "@/contexts/ThemeContext";
 
 interface CartItemProps {
   id: number;
@@ -15,7 +13,6 @@ interface CartItemProps {
 
 const CartItem = ({ id, name, price, quantity, image }: CartItemProps) => {
   const { updateQuantity, removeFromCart } = useCart();
-  const { theme } = useTheme();
   
   const formattedPrice = new Intl.NumberFormat('pt-BR', {
     style: 'currency',
@@ -28,12 +25,7 @@ const CartItem = ({ id, name, price, quantity, image }: CartItemProps) => {
   }).format(price * quantity);
 
   return (
-    <div className={cn(
-      "flex items-center py-5 space-x-4 group px-2 -mx-2 transition-colors rounded-lg",
-      theme === "dark" 
-        ? "hover:bg-muted" 
-        : "hover:bg-gray-50"
-    )}>
+    <div className="flex items-center py-5 space-x-4 group hover:bg-gray-50 rounded-lg px-2 -mx-2 transition-colors">
       <div className="h-20 w-20 flex-shrink-0 overflow-hidden rounded-md relative">
         <img
           src={image}
@@ -45,12 +37,7 @@ const CartItem = ({ id, name, price, quantity, image }: CartItemProps) => {
         />
         <Badge 
           variant="secondary" 
-          className={cn(
-            "absolute bottom-0 right-0 backdrop-blur-sm text-xs border-0",
-            theme === "dark" 
-              ? "bg-card/80 text-foreground" 
-              : "bg-white/80 text-gray-700"
-          )}
+          className="absolute bottom-0 right-0 bg-white/80 backdrop-blur-sm text-xs text-gray-700 border-0"
         >
           {formattedPrice}
         </Badge>
@@ -58,10 +45,7 @@ const CartItem = ({ id, name, price, quantity, image }: CartItemProps) => {
       
       <div className="flex-1 flex flex-col">
         <div className="flex justify-between">
-          <h3 className={cn(
-            "font-medium",
-            theme === "dark" ? "text-foreground" : "text-gray-900"
-          )}>{name}</h3>
+          <h3 className="font-medium text-gray-900">{name}</h3>
           <button 
             onClick={() => removeFromCart(id)}
             className="text-gray-400 hover:text-red-500 transition-colors opacity-0 group-hover:opacity-100"
@@ -72,39 +56,21 @@ const CartItem = ({ id, name, price, quantity, image }: CartItemProps) => {
         </div>
         
         <div className="mt-1 flex items-end justify-between">
-          <div className={cn(
-            "flex items-center rounded-lg border p-1",
-            theme === "dark" 
-              ? "bg-muted border-border" 
-              : "bg-gray-50 border-gray-100"
-          )}>
+          <div className="flex items-center bg-gray-50 rounded-lg border border-gray-100 p-1">
             <button
               onClick={() => updateQuantity(id, quantity - 1)}
               disabled={quantity <= 1}
-              className={cn(
-                "p-1 rounded-md transition-colors disabled:opacity-50",
-                theme === "dark" 
-                  ? "hover:bg-accent" 
-                  : "hover:bg-gray-200"
-              )}
+              className="p-1 rounded-md hover:bg-gray-200 transition-colors disabled:opacity-50"
               aria-label="Diminuir quantidade"
             >
               <Minus size={14} />
             </button>
             
-            <span className={cn(
-              "mx-3 w-5 text-center font-medium",
-              theme === "dark" ? "text-foreground" : "text-gray-900"
-            )}>{quantity}</span>
+            <span className="mx-3 w-5 text-center font-medium text-gray-900">{quantity}</span>
             
             <button
               onClick={() => updateQuantity(id, quantity + 1)}
-              className={cn(
-                "p-1 rounded-md transition-colors",
-                theme === "dark" 
-                  ? "hover:bg-accent" 
-                  : "hover:bg-gray-200"
-              )}
+              className="p-1 rounded-md hover:bg-gray-200 transition-colors"
               aria-label="Aumentar quantidade"
             >
               <Plus size={14} />
@@ -114,10 +80,7 @@ const CartItem = ({ id, name, price, quantity, image }: CartItemProps) => {
           <div className="flex flex-col items-end">
             <div className="text-brand-magenta font-bold">{formattedTotal}</div>
             {quantity > 1 && (
-              <div className={cn(
-                "text-xs",
-                theme === "dark" ? "text-muted-foreground" : "text-gray-500"
-              )}>
+              <div className="text-xs text-gray-500">
                 {quantity}x {formattedPrice}
               </div>
             )}

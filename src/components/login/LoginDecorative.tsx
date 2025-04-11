@@ -2,19 +2,10 @@
 import React from "react";
 import { Instagram, Twitter, Star } from "lucide-react";
 import LoginLogo from "./LoginLogo";
-import { useTheme } from "@/contexts/ThemeContext";
-import { cn } from "@/lib/utils";
 
 const LoginDecorative = () => {
-  const { theme } = useTheme();
-  
   return (
-    <div className={cn(
-      "hidden md:flex md:w-1/2 p-8 justify-center items-center relative overflow-hidden",
-      theme === "dark" 
-        ? "bg-gradient-to-br from-gray-900 to-gray-800" 
-        : "bg-gradient-to-br from-white to-gray-100"
-    )}>
+    <div className="hidden md:flex md:w-1/2 bg-gradient-to-br from-white to-gray-100 p-8 justify-center items-center relative overflow-hidden">
       {/* Background patterns - subtle animation */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Animated circles */}
@@ -40,9 +31,7 @@ const LoginDecorative = () => {
         {/* Grid pattern overlay */}
         <div className="absolute inset-0" 
           style={{
-            backgroundImage: theme === "dark" 
-              ? 'linear-gradient(to right, rgba(233,30,99,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(233,30,99,0.05) 1px, transparent 1px)'
-              : 'linear-gradient(to right, rgba(233,30,99,0.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(233,30,99,0.03) 1px, transparent 1px)',
+            backgroundImage: 'linear-gradient(to right, rgba(233,30,99,0.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(233,30,99,0.03) 1px, transparent 1px)',
             backgroundSize: '40px 40px'
           }} 
         />
@@ -51,20 +40,14 @@ const LoginDecorative = () => {
       <div className="z-10 max-w-md relative">
         <LoginLogo className="mb-8" />
         
-        <h1 className={cn(
-          "text-4xl font-bold mb-4",
-          theme === "dark" ? "text-gray-100" : "text-gray-800"
-        )}>
+        <h1 className="text-4xl font-bold mb-4 text-gray-800">
           Bem-vindo(a) à sua<br />
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-brand-magenta to-brand-orange animate-text">
             loja exclusiva
           </span>
         </h1>
         
-        <p className={cn(
-          "text-lg leading-relaxed",
-          theme === "dark" ? "text-gray-300" : "text-gray-600"
-        )}>
+        <p className="text-lg text-gray-600 leading-relaxed">
           Faça login para acessar uma experiência personalizada
           com produtos exclusivos selecionados especialmente para você.
         </p>
@@ -75,13 +58,11 @@ const LoginDecorative = () => {
             icon={<Star className="h-5 w-5 text-brand-magenta" />} 
             text="Produtos exclusivos" 
             bgClass="bg-brand-magenta/10" 
-            theme={theme}
           />
           <FeatureItem 
             icon={<Instagram className="h-5 w-5 text-brand-orange" />} 
             text="Compartilhamento fácil" 
             bgClass="bg-brand-orange/10" 
-            theme={theme}
           />
           <FeatureItem 
             icon={
@@ -91,13 +72,11 @@ const LoginDecorative = () => {
             } 
             text="Entrega expressa" 
             bgClass="bg-brand-magenta/10" 
-            theme={theme}
           />
           <FeatureItem 
             icon={<Twitter className="h-5 w-5 text-brand-orange" />} 
             text="Visibilidade social" 
             bgClass="bg-brand-orange/10" 
-            theme={theme}
           />
         </div>
       </div>
@@ -109,15 +88,14 @@ type FeatureItemProps = {
   icon: React.ReactNode;
   text: string;
   bgClass: string;
-  theme: string;
 };
 
-const FeatureItem = ({ icon, text, bgClass, theme }: FeatureItemProps) => (
+const FeatureItem = ({ icon, text, bgClass }: FeatureItemProps) => (
   <div className="flex items-center space-x-2">
     <div className={`h-10 w-10 rounded-full ${bgClass} flex items-center justify-center`}>
       {icon}
     </div>
-    <span className={theme === "dark" ? "text-gray-300" : "text-gray-700"}>{text}</span>
+    <span className="text-gray-700">{text}</span>
   </div>
 );
 

@@ -8,8 +8,6 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { Eye, EyeOff, ArrowRight, Mail, Lock } from "lucide-react";
-import { useTheme } from "@/contexts/ThemeContext";
-import { cn } from "@/lib/utils";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
@@ -19,7 +17,6 @@ const LoginForm = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
-  const { theme } = useTheme();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -47,22 +44,14 @@ const LoginForm = () => {
   const toggleShowPassword = () => setShowPassword(!showPassword);
 
   return (
-    <Card className={cn(
-      "shadow-lg",
-      theme === "dark" 
-        ? "bg-gray-800 border-gray-700" 
-        : "bg-white border-gray-100"
-    )}>
+    <Card className="shadow-lg border border-gray-100">
       <CardHeader className="space-y-1 pb-4">
         <CardTitle className="text-2xl text-center font-bold">
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-brand-magenta to-brand-orange">
             Bem-vindo(a)
           </span>
         </CardTitle>
-        <CardDescription className={cn(
-          "text-center",
-          theme === "dark" ? "text-gray-400" : "text-gray-500"
-        )}>
+        <CardDescription className="text-center text-gray-500">
           Faça login para acessar a loja exclusiva
         </CardDescription>
       </CardHeader>
@@ -72,10 +61,7 @@ const LoginForm = () => {
           <div className="space-y-2">
             <Label 
               htmlFor="email" 
-              className={cn(
-                "font-medium flex items-center gap-2",
-                theme === "dark" ? "text-gray-300" : "text-gray-700"
-              )}
+              className="font-medium text-gray-700 flex items-center gap-2"
             >
               <Mail size={16} className="text-brand-magenta" />
               E-mail
@@ -88,12 +74,7 @@ const LoginForm = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className={cn(
-                  "pl-3 pr-3 py-2 h-12 rounded-xl transition-all",
-                  theme === "dark" 
-                    ? "border-gray-700 bg-gray-700 text-white focus-visible:ring-brand-magenta" 
-                    : "border-gray-200 focus-visible:ring-brand-magenta"
-                )}
+                className="pl-3 pr-3 py-2 h-12 rounded-xl border border-gray-200 focus-visible:ring-brand-magenta transition-all"
               />
               <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-brand-magenta/10 to-brand-orange/10 opacity-0 group-hover:opacity-100 -z-10 blur-sm transition-opacity"></div>
             </div>
@@ -103,10 +84,7 @@ const LoginForm = () => {
             <div className="flex items-center justify-between">
               <Label 
                 htmlFor="password" 
-                className={cn(
-                  "font-medium flex items-center gap-2",
-                  theme === "dark" ? "text-gray-300" : "text-gray-700"
-                )}
+                className="font-medium text-gray-700 flex items-center gap-2"
               >
                 <Lock size={16} className="text-brand-magenta" />
                 Senha
@@ -126,20 +104,12 @@ const LoginForm = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className={cn(
-                  "pl-3 pr-10 py-2 h-12 rounded-xl transition-all",
-                  theme === "dark" 
-                    ? "border-gray-700 bg-gray-700 text-white focus-visible:ring-brand-magenta" 
-                    : "border-gray-200 focus-visible:ring-brand-magenta"
-                )}
+                className="pl-3 pr-10 py-2 h-12 rounded-xl border border-gray-200 focus-visible:ring-brand-magenta transition-all"
               />
               <button
                 type="button"
                 onClick={toggleShowPassword}
-                className={cn(
-                  "absolute right-3 top-1/2 -translate-y-1/2 hover:text-gray-700",
-                  theme === "dark" ? "text-gray-400 hover:text-gray-300" : "text-gray-400"
-                )}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-700"
                 tabIndex={-1}
               >
                 {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
@@ -162,26 +132,21 @@ const LoginForm = () => {
             </span>
           </Button>
           
-          <SocialProof theme={theme} />
+          <SocialProof />
         </CardFooter>
       </form>
     </Card>
   );
 };
 
-const SocialProof = ({ theme }: { theme: string }) => (
-  <div className={cn(
-    "flex items-center justify-center text-sm mt-2",
-    theme === "dark" ? "text-gray-400" : "text-gray-500"
-  )}>
+const SocialProof = () => (
+  <div className="flex items-center justify-center text-gray-500 text-sm mt-2">
     <span className="flex items-center">
       <span className="inline-flex -space-x-2 overflow-hidden">
         {[1, 2, 3].map((i) => (
           <div 
             key={i}
-            className={`inline-block h-8 w-8 rounded-full ring-2 ${
-              theme === "dark" ? "ring-gray-800" : "ring-white"
-            } ${
+            className={`inline-block h-8 w-8 rounded-full ring-2 ring-white ${
               i % 3 === 0 ? 'bg-brand-magenta/20' : 
               i % 3 === 1 ? 'bg-brand-orange/20' : 'bg-purple-200'
             }`}
