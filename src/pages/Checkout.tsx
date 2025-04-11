@@ -8,18 +8,27 @@ import { useCart } from "@/contexts/CartContext";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { ShoppingBag, ArrowLeft, User, Phone, MapPin, AlertCircle, FileText } from "lucide-react";
+import { ShoppingBag, ArrowLeft, User, Phone, MapPin, AlertCircle, FileText, Home, Building, Map, City, Flag, Globe, ChevronDown, ChevronUp } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { Checkbox } from "@/components/ui/checkbox";
 
 const CheckoutPage = () => {
   const { cartItems, totalItems, clearCart } = useCart();
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [zipCode, setZipCode] = useState("");
-  const [address, setAddress] = useState("");
+  const [street, setStreet] = useState("");
+  const [number, setNumber] = useState("");
+  const [complement, setComplement] = useState("");
+  const [neighborhood, setNeighborhood] = useState("");
+  const [city, setCity] = useState("");
+  const [state, setState] = useState("");
+  const [country, setCountry] = useState("Brasil");
   const [observations, setObservations] = useState("");
+  const [showObservations, setShowObservations] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [zipCodeError, setZipCodeError] = useState("");
   const navigate = useNavigate();
@@ -79,8 +88,16 @@ const CheckoutPage = () => {
     sessionStorage.setItem("orderData", JSON.stringify({
       name,
       phone,
-      zipCode: zipCode || "Não informado",
-      address: address || "Não informado",
+      delivery: {
+        zipCode: zipCode || "Não informado",
+        street: street || "Não informado",
+        number: number || "S/N",
+        complement: complement || "Não informado",
+        neighborhood: neighborhood || "Não informado",
+        city: city || "Não informado",
+        state: state || "Não informado",
+        country: country || "Brasil"
+      },
       observations: observations || "Nenhuma observação",
       items: cartItems,
       timestamp: new Date().toISOString()
@@ -225,12 +242,13 @@ const CheckoutPage = () => {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <Label 
                       htmlFor="zipCode" 
-                      className="font-medium text-gray-700"
+                      className="font-medium text-gray-700 flex items-center gap-2"
                     >
+                      <MapPin size={14} className="text-gray-500" />
                       CEP
                     </Label>
                     <div className="relative mt-1 group">
@@ -250,21 +268,141 @@ const CheckoutPage = () => {
                   
                   <div>
                     <Label 
-                      htmlFor="address" 
-                      className="font-medium text-gray-700"
+                      htmlFor="country" 
+                      className="font-medium text-gray-700 flex items-center gap-2"
                     >
-                      Endereço Completo
+                      <Globe size={14} className="text-gray-500" />
+                      País
                     </Label>
                     <div className="relative mt-1 group">
                       <Input 
-                        id="address"
-                        value={address}
-                        onChange={e => setAddress(e.target.value)}
-                        placeholder="Rua, número, complemento, bairro, cidade, estado"
+                        id="country"
+                        value={country}
+                        onChange={e => setCountry(e.target.value)}
+                        placeholder="País"
                         className="pl-3 pr-3 py-2 h-11 rounded-lg border border-gray-200 focus-visible:ring-brand-magenta transition-all"
                       />
                     </div>
                   </div>
+                  
+                  <div className="md:col-span-2">
+                    <Label 
+                      htmlFor="street" 
+                      className="font-medium text-gray-700 flex items-center gap-2"
+                    >
+                      <Home size={14} className="text-gray-500" />
+                      Av/Rua
+                    </Label>
+                    <div className="relative mt-1 group">
+                      <Input 
+                        id="street"
+                        value={street}
+                        onChange={e => setStreet(e.target.value)}
+                        placeholder="Nome da rua ou avenida"
+                        className="pl-3 pr-3 py-2 h-11 rounded-lg border border-gray-200 focus-visible:ring-brand-magenta transition-all"
+                      />
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <Label 
+                      htmlFor="number" 
+                      className="font-medium text-gray-700"
+                    >
+                      Número
+                    </Label>
+                    <div className="relative mt-1 group">
+                      <Input 
+                        id="number"
+                        value={number}
+                        onChange={e => setNumber(e.target.value)}
+                        placeholder="Número"
+                        className="pl-3 pr-3 py-2 h-11 rounded-lg border border-gray-200 focus-visible:ring-brand-magenta transition-all"
+                      />
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <Label 
+                      htmlFor="complement" 
+                      className="font-medium text-gray-700"
+                    >
+                      Complemento
+                    </Label>
+                    <div className="relative mt-1 group">
+                      <Input 
+                        id="complement"
+                        value={complement}
+                        onChange={e => setComplement(e.target.value)}
+                        placeholder="Casa, Apto, Bloco"
+                        className="pl-3 pr-3 py-2 h-11 rounded-lg border border-gray-200 focus-visible:ring-brand-magenta transition-all"
+                      />
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <Label 
+                      htmlFor="neighborhood" 
+                      className="font-medium text-gray-700 flex items-center gap-2"
+                    >
+                      <Building size={14} className="text-gray-500" />
+                      Bairro
+                    </Label>
+                    <div className="relative mt-1 group">
+                      <Input 
+                        id="neighborhood"
+                        value={neighborhood}
+                        onChange={e => setNeighborhood(e.target.value)}
+                        placeholder="Bairro"
+                        className="pl-3 pr-3 py-2 h-11 rounded-lg border border-gray-200 focus-visible:ring-brand-magenta transition-all"
+                      />
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <Label 
+                      htmlFor="city" 
+                      className="font-medium text-gray-700 flex items-center gap-2"
+                    >
+                      <City size={14} className="text-gray-500" />
+                      Cidade
+                    </Label>
+                    <div className="relative mt-1 group">
+                      <Input 
+                        id="city"
+                        value={city}
+                        onChange={e => setCity(e.target.value)}
+                        placeholder="Cidade"
+                        className="pl-3 pr-3 py-2 h-11 rounded-lg border border-gray-200 focus-visible:ring-brand-magenta transition-all"
+                      />
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <Label 
+                      htmlFor="state" 
+                      className="font-medium text-gray-700 flex items-center gap-2"
+                    >
+                      <Flag size={14} className="text-gray-500" />
+                      Estado
+                    </Label>
+                    <div className="relative mt-1 group">
+                      <Input 
+                        id="state"
+                        value={state}
+                        onChange={e => setState(e.target.value)}
+                        placeholder="Estado"
+                        className="pl-3 pr-3 py-2 h-11 rounded-lg border border-gray-200 focus-visible:ring-brand-magenta transition-all"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-6 flex items-start gap-2 p-3 bg-amber-50 border border-amber-200 rounded-md text-amber-800">
+                  <AlertCircle className="h-5 w-5 flex-shrink-0 mt-0.5" />
+                  <p className="text-sm">
+                    Os itens selecionados estão sujeitos à confirmação de estoque e serão reservados em um momento posterior à conclusão da compra.
+                  </p>
                 </div>
               </CardContent>
             </Card>
@@ -277,30 +415,49 @@ const CheckoutPage = () => {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div>
-                  <Label 
-                    htmlFor="observations" 
-                    className="font-medium text-gray-700"
-                  >
-                    Informações adicionais para seu pedido
-                  </Label>
-                  <div className="relative mt-1 group">
+                <Collapsible
+                  open={showObservations}
+                  onOpenChange={setShowObservations}
+                  className="space-y-2"
+                >
+                  <div className="flex items-center space-x-4">
+                    <div className="flex-1 flex items-center space-x-2">
+                      <Checkbox 
+                        id="hasObservations" 
+                        checked={showObservations}
+                        onCheckedChange={() => setShowObservations(!showObservations)}
+                      />
+                      <Label htmlFor="hasObservations" className="text-sm font-medium cursor-pointer">
+                        Deseja adicionar observações ao seu pedido?
+                      </Label>
+                    </div>
+                    <CollapsibleTrigger asChild>
+                      <Button variant="ghost" size="sm" className="w-9 p-0">
+                        {showObservations ? (
+                          <ChevronUp className="h-4 w-4" />
+                        ) : (
+                          <ChevronDown className="h-4 w-4" />
+                        )}
+                        <span className="sr-only">Toggle</span>
+                      </Button>
+                    </CollapsibleTrigger>
+                  </div>
+                  <CollapsibleContent className="space-y-2">
+                    <Label 
+                      htmlFor="observations" 
+                      className="font-medium text-gray-700"
+                    >
+                      Informações adicionais para seu pedido
+                    </Label>
                     <Textarea 
                       id="observations"
                       value={observations}
                       onChange={e => setObservations(e.target.value)}
                       placeholder="Informações adicionais para entrega ou sobre os produtos"
-                      className="min-h-[100px] border-gray-200 focus-visible:ring-brand-magenta transition-all resize-none"
+                      className="min-h-[80px] border-gray-200 focus-visible:ring-brand-magenta transition-all resize-none"
                     />
-                  </div>
-                </div>
-
-                <div className="mt-6 flex items-start gap-2 p-3 bg-amber-50 border border-amber-200 rounded-md text-amber-800">
-                  <AlertCircle className="h-5 w-5 flex-shrink-0 mt-0.5" />
-                  <p className="text-sm">
-                    Os itens selecionados estão sujeitos à confirmação de estoque e serão reservados em um momento posterior à conclusão da compra.
-                  </p>
-                </div>
+                  </CollapsibleContent>
+                </Collapsible>
               </CardContent>
             </Card>
           </div>
