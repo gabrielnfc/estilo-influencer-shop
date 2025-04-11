@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
-import { Eye, EyeOff, ArrowRight, Mail, Lock } from "lucide-react";
+import { Eye, EyeOff, ArrowRight, Mail, Lock, Instagram, Twitter, Star } from "lucide-react";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -48,22 +48,24 @@ const LoginPage = () => {
   const toggleShowPassword = () => setShowPassword(!showPassword);
 
   return (
-    <div className="min-h-screen w-full flex flex-col md:flex-row bg-[#0F172A]">
+    <div className="min-h-screen w-full flex flex-col md:flex-row bg-white">
       {/* Left decorative section - only visible on md screens and above */}
-      <div className="hidden md:flex md:w-1/2 bg-gradient-to-br from-[#0F172A] to-[#0F172A] p-8 justify-center items-center relative overflow-hidden">
+      <div className="hidden md:flex md:w-1/2 bg-gradient-to-br from-white to-gray-100 p-8 justify-center items-center relative overflow-hidden">
         {/* Background patterns - subtle animation */}
         <div className="absolute inset-0 overflow-hidden">
           {/* Animated circles */}
-          {Array.from({ length: 10 }).map((_, i) => (
+          {Array.from({ length: 6 }).map((_, i) => (
             <div 
               key={i}
-              className="absolute rounded-full opacity-10"
+              className="absolute rounded-full"
               style={{
                 width: `${Math.random() * 400 + 100}px`,
                 height: `${Math.random() * 400 + 100}px`,
                 top: `${Math.random() * 100}%`,
                 left: `${Math.random() * 100}%`,
-                background: `rgba(255,87,34,${Math.random() * 0.15})`,
+                background: i % 2 === 0 
+                  ? `linear-gradient(135deg, rgba(233,30,99,0.1), rgba(255,87,34,0.1))`
+                  : `linear-gradient(135deg, rgba(255,87,34,0.1), rgba(233,30,99,0.1))`,
                 filter: 'blur(40px)',
                 transform: `scale(${Math.random() + 0.5})`,
                 animation: `pulse ${Math.random() * 10 + 10}s infinite alternate ease-in-out`,
@@ -72,91 +74,88 @@ const LoginPage = () => {
           ))}
           
           {/* Grid pattern overlay */}
-          <div className="absolute inset-0 bg-grid-white/[0.02]" 
+          <div className="absolute inset-0" 
             style={{
-              backgroundImage: 'linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px)',
+              backgroundImage: 'linear-gradient(to right, rgba(233,30,99,0.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(233,30,99,0.03) 1px, transparent 1px)',
               backgroundSize: '40px 40px'
             }} 
           />
         </div>
         
-        <div className="z-10 text-white max-w-md relative">
+        <div className="z-10 max-w-md relative">
           <div className="mb-8 relative">
             {/* Spotlight effect behind logo */}
-            <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-pink-600/30 to-orange-400/30 blur-xl" />
+            <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-brand-magenta/20 to-brand-orange/20 blur-md" />
             
             {/* Logo with glow effect */}
-            <div className="relative p-2 bg-white bg-opacity-10 backdrop-blur-md rounded-2xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.37)]">
+            <div className="relative p-4 bg-white rounded-2xl shadow-lg">
               <img 
                 src="/lovable-uploads/ab795641-0b7b-4946-b1fc-cb5b0efe542d.png" 
                 alt="Logo" 
-                className="h-28 w-28 animate-fade-in drop-shadow-[0_0_15px_rgba(233,30,99,0.5)]" 
+                className="h-28 w-28 drop-shadow-lg" 
               />
             </div>
           </div>
           
-          <h1 className="text-4xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-brand-magenta via-white to-brand-orange animate-text">
-            Bem-vindo(a) à sua<br />loja exclusiva
+          <h1 className="text-4xl font-bold mb-4 text-gray-800">
+            Bem-vindo(a) à sua<br />
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-brand-magenta to-brand-orange animate-text">
+              loja exclusiva
+            </span>
           </h1>
           
-          <p className="text-lg text-gray-300 leading-relaxed">
+          <p className="text-lg text-gray-600 leading-relaxed">
             Faça login para acessar uma experiência personalizada
             com produtos exclusivos selecionados especialmente para você.
           </p>
           
-          {/* Feature highlights */}
-          <div className="mt-12 grid grid-cols-2 gap-4">
+          {/* Feature highlights with social elements */}
+          <div className="mt-10 grid grid-cols-2 gap-4">
             <div className="flex items-center space-x-2">
-              <div className="h-8 w-8 rounded-full bg-brand-magenta/20 flex items-center justify-center">
-                <svg className="h-4 w-4 text-brand-magenta" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-                </svg>
+              <div className="h-10 w-10 rounded-full bg-brand-magenta/10 flex items-center justify-center">
+                <Star className="h-5 w-5 text-brand-magenta" />
               </div>
-              <span className="text-gray-300 text-sm">Produtos exclusivos</span>
+              <span className="text-gray-700">Produtos exclusivos</span>
             </div>
             <div className="flex items-center space-x-2">
-              <div className="h-8 w-8 rounded-full bg-brand-orange/20 flex items-center justify-center">
-                <svg className="h-4 w-4 text-brand-orange" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <div className="h-10 w-10 rounded-full bg-brand-orange/10 flex items-center justify-center">
+                <Instagram className="h-5 w-5 text-brand-orange" />
+              </div>
+              <span className="text-gray-700">Compartilhamento fácil</span>
+            </div>
+            <div className="flex items-center space-x-2">
+              <div className="h-10 w-10 rounded-full bg-brand-magenta/10 flex items-center justify-center">
+                <svg className="h-5 w-5 text-brand-magenta" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <span className="text-gray-300 text-sm">Entrega rápida</span>
+              <span className="text-gray-700">Entrega expressa</span>
             </div>
             <div className="flex items-center space-x-2">
-              <div className="h-8 w-8 rounded-full bg-brand-magenta/20 flex items-center justify-center">
-                <svg className="h-4 w-4 text-brand-magenta" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                </svg>
+              <div className="h-10 w-10 rounded-full bg-brand-orange/10 flex items-center justify-center">
+                <Twitter className="h-5 w-5 text-brand-orange" />
               </div>
-              <span className="text-gray-300 text-sm">Acesso seguro</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <div className="h-8 w-8 rounded-full bg-brand-orange/20 flex items-center justify-center">
-                <svg className="h-4 w-4 text-brand-orange" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                </svg>
-              </div>
-              <span className="text-gray-300 text-sm">Atendimento VIP</span>
+              <span className="text-gray-700">Visibilidade social</span>
             </div>
           </div>
         </div>
       </div>
 
       {/* Login form section */}
-      <div className="w-full md:w-1/2 flex items-center justify-center p-6 md:p-8 bg-gradient-to-b from-[#0F172A] to-[#1E293B]">
+      <div className="w-full md:w-1/2 flex items-center justify-center p-6 md:p-12 bg-white">
         <div className="w-full max-w-md">
           {/* Logo - only visible on mobile */}
           <div className="flex justify-center mb-8 md:hidden">
             {/* Spotlight effect behind logo */}
             <div className="relative">
-              <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-pink-600/30 to-orange-400/30 blur-xl" />
+              <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-brand-magenta/20 to-brand-orange/20 blur-md" />
               
               {/* Logo with glow effect */}
-              <div className="relative p-2 bg-white bg-opacity-10 backdrop-blur-md rounded-2xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.37)]">
+              <div className="relative p-4 bg-white rounded-2xl shadow-lg">
                 <img 
                   src="/lovable-uploads/ab795641-0b7b-4946-b1fc-cb5b0efe542d.png" 
                   alt="Logo" 
-                  className="h-20 w-20 animate-fade-in drop-shadow-[0_0_15px_rgba(233,30,99,0.5)]" 
+                  className="h-20 w-20 drop-shadow-lg" 
                   onError={(e) => {
                     (e.target as HTMLImageElement).src = '/placeholder.svg';
                   }}
@@ -165,24 +164,24 @@ const LoginPage = () => {
             </div>
           </div>
           
-          <Card className="border-none shadow-xl bg-white/5 backdrop-blur-sm border border-white/10">
-            <CardHeader className="space-y-1 pb-2">
-              <CardTitle className="text-2xl text-center font-bold text-white">
+          <Card className="shadow-lg border border-gray-100">
+            <CardHeader className="space-y-1 pb-4">
+              <CardTitle className="text-2xl text-center font-bold">
                 <span className="bg-clip-text text-transparent bg-gradient-to-r from-brand-magenta to-brand-orange">
                   Bem-vindo(a)
                 </span>
               </CardTitle>
-              <CardDescription className="text-center text-gray-400">
+              <CardDescription className="text-center text-gray-500">
                 Faça login para acessar a loja exclusiva
               </CardDescription>
             </CardHeader>
             
             <form onSubmit={handleSubmit}>
-              <CardContent className="space-y-4 pt-4">
+              <CardContent className="space-y-4 pt-2">
                 <div className="space-y-2">
                   <Label 
                     htmlFor="email" 
-                    className="font-medium text-gray-300 flex items-center gap-2"
+                    className="font-medium text-gray-700 flex items-center gap-2"
                   >
                     <Mail size={16} className="text-brand-magenta" />
                     E-mail
@@ -195,9 +194,9 @@ const LoginPage = () => {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       required
-                      className="pl-3 pr-3 py-2 h-12 rounded-xl bg-white/10 border-gray-700 focus-visible:ring-brand-magenta text-white placeholder:text-gray-500 transition-all"
+                      className="pl-3 pr-3 py-2 h-12 rounded-xl border border-gray-200 focus-visible:ring-brand-magenta transition-all"
                     />
-                    <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-brand-magenta/20 to-brand-orange/20 opacity-0 group-hover:opacity-100 -z-10 blur-sm transition-opacity"></div>
+                    <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-brand-magenta/10 to-brand-orange/10 opacity-0 group-hover:opacity-100 -z-10 blur-sm transition-opacity"></div>
                   </div>
                 </div>
                 
@@ -205,7 +204,7 @@ const LoginPage = () => {
                   <div className="flex items-center justify-between">
                     <Label 
                       htmlFor="password" 
-                      className="font-medium text-gray-300 flex items-center gap-2"
+                      className="font-medium text-gray-700 flex items-center gap-2"
                     >
                       <Lock size={16} className="text-brand-magenta" />
                       Senha
@@ -225,17 +224,17 @@ const LoginPage = () => {
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       required
-                      className="pl-3 pr-10 py-2 h-12 rounded-xl bg-white/10 border-gray-700 focus-visible:ring-brand-magenta text-white placeholder:text-gray-500 transition-all"
+                      className="pl-3 pr-10 py-2 h-12 rounded-xl border border-gray-200 focus-visible:ring-brand-magenta transition-all"
                     />
                     <button
                       type="button"
                       onClick={toggleShowPassword}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-200"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-700"
                       tabIndex={-1}
                     >
                       {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                     </button>
-                    <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-brand-magenta/20 to-brand-orange/20 opacity-0 group-hover:opacity-100 -z-10 blur-sm transition-opacity"></div>
+                    <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-brand-magenta/10 to-brand-orange/10 opacity-0 group-hover:opacity-100 -z-10 blur-sm transition-opacity"></div>
                   </div>
                 </div>
               </CardContent>
@@ -243,15 +242,35 @@ const LoginPage = () => {
               <CardFooter className="flex flex-col gap-4 pt-2 pb-6">
                 <Button 
                   type="submit" 
-                  className="w-full h-12 text-base rounded-xl bg-white/10 hover:bg-white/20 border border-white/10 backdrop-blur-sm shadow-[0_0_20px_rgba(233,30,99,0.3)] hover:shadow-[0_0_25px_rgba(233,30,99,0.5)] transition-all duration-300 relative overflow-hidden group"
+                  className="w-full h-12 text-base rounded-xl shadow-md hover:shadow-lg transition-all duration-300 relative overflow-hidden group"
                   disabled={isLoading}
                 >
-                  <span className="absolute inset-0 bg-gradient-to-r from-brand-magenta to-brand-orange opacity-80 z-0 transition-opacity group-hover:opacity-100"></span>
+                  <span className="absolute inset-0 bg-gradient-to-r from-brand-magenta to-brand-orange opacity-90 z-0 transition-opacity group-hover:opacity-100"></span>
                   <span className="relative z-10 flex items-center justify-center gap-2 font-semibold text-white">
                     {isLoading ? "Entrando..." : "Entrar"}
                     <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform duration-200" />
                   </span>
                 </Button>
+                
+                {/* Social proof element */}
+                <div className="flex items-center justify-center text-gray-500 text-sm mt-2">
+                  <span className="flex items-center">
+                    <span className="inline-flex -space-x-2 overflow-hidden">
+                      {[1, 2, 3].map((i) => (
+                        <div 
+                          key={i}
+                          className={`inline-block h-8 w-8 rounded-full ring-2 ring-white ${
+                            i % 3 === 0 ? 'bg-brand-magenta/20' : 
+                            i % 3 === 1 ? 'bg-brand-orange/20' : 'bg-purple-200'
+                          }`}
+                        >
+                          <span className="sr-only">User {i}</span>
+                        </div>
+                      ))}
+                    </span>
+                    <span className="ml-4">+240 criadores já conectados</span>
+                  </span>
+                </div>
               </CardFooter>
             </form>
           </Card>
