@@ -1,5 +1,4 @@
-
-import { ShoppingCart, LogOut, User, Heart, History, Sun, Moon } from "lucide-react";
+import { ShoppingCart, LogOut, User, Heart, History } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useCart } from "@/contexts/CartContext";
 import { useFavorites } from "@/contexts/FavoritesContext";
@@ -32,7 +31,7 @@ const Header = () => {
   }).format(totalPrice);
 
   return (
-    <header className="bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800 py-3 px-4 md:px-6 shadow-sm sticky top-0 z-10">
+    <header className="bg-white border-b border-gray-100 py-3 px-4 md:px-6 shadow-sm sticky top-0 z-10">
       <div className="container mx-auto flex items-center justify-between">
         <Link to="/store" className="flex items-center space-x-2">
           <div className="relative">
@@ -52,14 +51,13 @@ const Header = () => {
         </Link>
         
         <div className="flex items-center space-x-1 sm:space-x-3">
-          {/* Add the ThemeToggle button here */}
           <ThemeToggle />
           
           <Link to="/favorites">
             <Button 
               variant="ghost" 
               size="icon" 
-              className={`relative ${favorites.length > 0 ? 'text-brand-magenta' : 'text-gray-600 dark:text-gray-400'}`} 
+              className={`relative ${favorites.length > 0 ? 'text-brand-magenta' : 'text-gray-600'}`} 
               aria-label="Favoritos"
             >
               <Heart className="h-5 w-5" />
@@ -77,7 +75,7 @@ const Header = () => {
             <Button 
               variant="ghost" 
               size="icon" 
-              className={`relative ${totalItems > 0 ? 'text-brand-magenta' : 'text-gray-600 dark:text-gray-400'}`} 
+              className={`relative ${totalItems > 0 ? 'text-brand-magenta' : 'text-gray-600'}`} 
               aria-label="Carrinho"
             >
               <ShoppingCart className="h-5 w-5" />
@@ -88,9 +86,8 @@ const Header = () => {
               )}
             </Button>
             
-            {/* Cart price preview */}
             {totalItems > 0 && (
-              <div className="hidden sm:block absolute top-full right-0 mt-1 bg-white dark:bg-gray-800 rounded-md py-1 px-2 text-xs font-medium text-brand-magenta border border-gray-100 dark:border-gray-700 shadow-sm">
+              <div className="hidden sm:block absolute top-full right-0 mt-1 bg-white rounded-md py-1 px-2 text-xs font-medium text-brand-magenta border border-gray-100 shadow-sm">
                 {formattedTotal}
               </div>
             )}
@@ -98,23 +95,23 @@ const Header = () => {
           
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="icon" className="rounded-full bg-gray-50 dark:bg-gray-800">
-                <User className="h-5 w-5 text-gray-700 dark:text-gray-300" />
+              <Button variant="ghost" size="icon" className="rounded-full bg-gray-50">
+                <User className="h-5 w-5 text-gray-700" />
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-56 bg-white dark:bg-gray-900 border-gray-100 dark:border-gray-800">
-              <DropdownMenuLabel className="text-gray-700 dark:text-gray-300">Área do Cliente</DropdownMenuLabel>
-              <DropdownMenuSeparator className="bg-gray-100 dark:bg-gray-800" />
-              <DropdownMenuItem className="text-sm text-gray-600 dark:text-gray-400">
+            <DropdownMenuContent align="end" className="w-56 bg-white border-gray-100">
+              <DropdownMenuLabel className="text-gray-700">Área do Cliente</DropdownMenuLabel>
+              <DropdownMenuSeparator className="bg-gray-100" />
+              <DropdownMenuItem className="text-sm text-gray-600">
                 {user?.email}
               </DropdownMenuItem>
-              <DropdownMenuItem asChild className="flex items-center cursor-pointer text-gray-700 dark:text-gray-300">
+              <DropdownMenuItem asChild className="flex items-center cursor-pointer text-gray-700">
                 <Link to="/purchase-history">
                   <History className="mr-2 h-4 w-4" />
                   <span>Histórico de Compras</span>
                 </Link>
               </DropdownMenuItem>
-              <DropdownMenuSeparator className="bg-gray-100 dark:bg-gray-800" />
+              <DropdownMenuSeparator className="bg-gray-100" />
               <DropdownMenuItem onClick={logout} className="text-red-500 cursor-pointer">
                 <LogOut className="mr-2 h-4 w-4" />
                 <span>Sair</span>
